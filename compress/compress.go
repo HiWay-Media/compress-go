@@ -8,7 +8,7 @@ import (
 
 type ICompress interface {
 	// 
-	HealthCheck() 
+	HealthCheck() error
 	//
 }
 
@@ -21,7 +21,7 @@ type compress struct {
 func NewCompress(isDebug bool) ICompress{
 	c := &compress{
 		debug: isDebug,
-		restClient: resty.New()
+		restClient: resty.New(),
 	}
 	c.restClient.SetBaseURL(TNGRM_BASE_URL)
 	//
