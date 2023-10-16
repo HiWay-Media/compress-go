@@ -20,7 +20,7 @@ type compress struct {
 
 func NewCompress(isDebug bool) ICompress{
 	c := &compress{
-		debug: isDebug
+		debug: isDebug,
 		restClient: resty.New()
 	}
 	c.restClient.SetBaseURL(TNGRM_BASE_URL)
