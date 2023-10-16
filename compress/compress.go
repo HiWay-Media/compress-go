@@ -16,9 +16,9 @@ type compress struct {
 }
 
 
-func NewCompress() {
-	fk := &fakeyou{
-		configuration: configuration,
+func NewCompress() ICompress{
+	c := &compress{
 	}
-	fk.restClient = resty.New()
+	c.restClient = resty.New()
+	return c
 }
