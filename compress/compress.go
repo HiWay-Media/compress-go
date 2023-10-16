@@ -8,17 +8,22 @@ import (
 
 type ICompress interface {
 	// 
+	HealthCheck() 
 	//
 }
 
 type compress struct {
 	restClient    *resty.Client
+	debug bool
 }
 
 
-func NewCompress() ICompress{
+func NewCompress(isDebug bool) ICompress{
 	c := &compress{
+		debug: isDebug
+		restClient: resty.New()
 	}
-	c.restClient = resty.New()
+	c.restClient.SetBaseURL(TNGRM_BASE_URL)
+	//
 	return c
 }
