@@ -25,7 +25,7 @@ func NewCompress(customerName, apiKey string,isDebug bool) ICompress{
 		apiKey: apiKey,
 	}
 	c.restClient.SetBaseURL(TNGRM_BASE_URL)
-	c.restClient.debug = isDebug
+	c.restClient.SetDebug(isDebug)
 	//
 	return c
 }
