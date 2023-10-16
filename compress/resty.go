@@ -2,6 +2,7 @@ package compress
 
 import (
 	"github.com/go-resty/resty/v2"
+	"fmt"
 )
 
 
