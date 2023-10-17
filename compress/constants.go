@@ -1,9 +1,23 @@
 package compress
 
 const (
-	TNGRM_BASE_URL                 = "https://api.tngrm.io/api/v3.0"
-	AUTH_LOGIN                     = "/external/auth/login"
-	GET_CATEGORIES                 = "/external/upload/categories"
-	GET_RESTREAMERS                = "/external/restreamers"
-	GET_UPLOADS                    = "/external/upload"
+	TNGRM_BASE_URL                 	= "https://api.tngrm.io/api/v3.0"
+	AUTH_LOGIN                     	= "/external/auth/login"
+	CATEGORIES                 	   	= "/external/upload/categories"
+	RESTREAMERS                		= "/external/restreamers"
+	UPLOADS                    		= "/external/upload"
+)
+//
+var (
+	//
+	GET_CATEGORIES = func() string {
+		return TNGRM_BASE_URL+CATEGORIES
+	}
+	GET_RESTREAMERS = func() string {
+		return TNGRM_BASE_URL+RESTREAMERS
+	}
+	GET_UPLOADS = func() string {
+		return TNGRM_BASE_URL+UPLOADS
+	}
+	//
 )

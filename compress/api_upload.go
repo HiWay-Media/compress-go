@@ -1,5 +1,8 @@
 package compress
 
+import (
+	"fmt"
+)
 
 /**
 	* upload video with compress encoding
@@ -15,3 +18,12 @@ package compress
 	* @param {string} location_place 
 	* @param {number} category_id 
 */
+func(o *compress) GetUploads(startFrom int, amount int, title *string, categoryName *string, tags *string) error{
+	resp, err := o.restyPost(GET_UPLOADS(), nil)
+	if err != nil {
+		return err
+	}
+	if resp.IsError() {
+		return fmt.Errorf("")
+	}
+}
