@@ -1,6 +1,7 @@
 package compress
 
 type UploadsPaginated struct {
+	BaseModel
 	StartFrom   int     `json:"start_from"`
 	Amount      int     `json:"amount"`
 	TitleFilter *string `json:"q"`

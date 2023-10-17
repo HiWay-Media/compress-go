@@ -17,6 +17,10 @@ func (o *compress) HealthCheck() error {
 	return nil
 }
 
+func(o *compress) GetCliendId() string {
+	return o.customerName+"_client"
+}
+
 // Resty Methods
 
 func (o *compress) restyPost(url string, body interface{}) (*resty.Response, error) {
