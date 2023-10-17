@@ -2,6 +2,7 @@ package compress
 
 import (
 	"fmt"
+	"gopkg.in/validator.v2"
 )
 
 /**
@@ -18,7 +19,13 @@ import (
 	* @param {string} location_place 
 	* @param {number} category_id 
 */
-func(o *compress) GetUploads(startFrom int, amount int, title *string, categoryName *string, tags *string) error{
+func(o *compress) GetUploads(uploadsPaginated UploadsPaginated) error{
+	//
+	var requestBody uploadsPaginated
+	if errs := validator.Validate(requestBody); errs != nil {
+		// values not valid, deal with errors here
+		return errs.Error()
+	}
 	resp, err := o.restyPost(GET_UPLOADS(), nil)
 	if err != nil {
 		return err

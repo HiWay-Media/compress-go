@@ -7,7 +7,7 @@ import (
 type ICompress interface {
 	// 
 	HealthCheck() error
-	GetUploads(startFrom int, amount int, title *string, categoryName *string, tags *string) error
+	GetUploads(uploadsPaginated UploadsPaginated) error
 	//
 }
 //
