@@ -26,4 +26,5 @@ func(o *compress) GetUploads(startFrom int, amount int, title *string, categoryN
 	if resp.IsError() {
 		return fmt.Errorf("")
 	}
+	return nil
 }
