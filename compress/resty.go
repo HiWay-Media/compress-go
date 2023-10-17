@@ -1,12 +1,12 @@
 package compress
 
 import (
-	"github.com/go-resty/resty/v2"
 	"fmt"
+
+	"github.com/go-resty/resty/v2"
 )
 
-
-func(o *compress) HealthCheck() error {
+func (o *compress) HealthCheck() error {
 	resp, err := o.restyPost("/health", nil)
 	if err != nil {
 		return err
@@ -16,7 +16,6 @@ func(o *compress) HealthCheck() error {
 	}
 	return nil
 }
-
 
 // Resty Methods
 
