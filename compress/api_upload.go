@@ -2,7 +2,6 @@ package compress
 
 import (
 	"fmt"
-
 	"gopkg.in/validator.v2"
 )
 
@@ -30,6 +29,7 @@ func (o *compress) GetUploads(uploadsPaginated UploadsPaginated) error {
 	if err != nil {
 		return err
 	}
+	o.debugPrint(resp)
 	if resp.IsError() {
 		return fmt.Errorf("")
 	}
