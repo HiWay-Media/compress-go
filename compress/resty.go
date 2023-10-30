@@ -17,6 +17,10 @@ func (o *compress) HealthCheck() error {
 	return nil
 }
 
+func (o *compress) IsDebug() bool {
+	return o.debug
+}
+
 func(o *compress) GetCliendId() string {
 	return o.customerName+"_client"
 }

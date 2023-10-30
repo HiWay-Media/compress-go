@@ -7,6 +7,7 @@ import (
 type ICompress interface {
 	// 
 	HealthCheck() error
+	IsDebug() bool
 	GetUploads(uploadsPaginated UploadsPaginated) error
 	//
 }
