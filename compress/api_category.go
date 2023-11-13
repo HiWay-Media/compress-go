@@ -20,7 +20,7 @@ func (o *compress) GetCategories(requestBody categoriesRequest) ([]Category, err
 	}
 	resp, err := o.restyPost(GET_CATEGORIES(), nil)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	o.debugPrint(resp)
 	if resp.IsError() {
