@@ -35,3 +35,4 @@ func (o *compress) GetUploads(uploadsPaginated UploadsPaginated) error {
 	}
 	return nil
 }
+
