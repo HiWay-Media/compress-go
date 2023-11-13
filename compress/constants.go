@@ -2,7 +2,6 @@ package compress
 
 const (
 	TNGRM_BASE_URL                 	= "https://api.tngrm.io/api/v3.0"
-	AUTH_LOGIN                     	= "/external/auth/login"
 	CATEGORIES                 	   	= "/external/upload/categories"
 	RESTREAMERS                		= "/external/restreamers"
 	UPLOADS                    		= "/external/upload"
