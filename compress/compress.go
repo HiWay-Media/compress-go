@@ -9,6 +9,7 @@ type ICompress interface {
 	HealthCheck() error
 	IsDebug() bool
 	GetUploads(uploadsPaginated UploadsPaginated) error
+	GetCategories(requestBody categoriesRequest) ([]Category, error)
 	//
 }
 //
