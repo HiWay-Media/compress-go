@@ -1,5 +1,10 @@
 package compress
 
+import (
+	"fmt"
+	"gopkg.in/validator.v2"
+)
+
 /**
 *
 * @param {string} apikey
