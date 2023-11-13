@@ -16,7 +16,7 @@ func (o *compress) GetCategories(requestBody categoriesRequest) ([]Category, err
 	//
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
-		return errs
+		return nil, errs
 	}
 	resp, err := o.restyPost(GET_CATEGORIES(), nil)
 	if err != nil {
@@ -24,8 +24,8 @@ func (o *compress) GetCategories(requestBody categoriesRequest) ([]Category, err
 	}
 	o.debugPrint(resp)
 	if resp.IsError() {
-		return fmt.Errorf("")
+		return nil, fmt.Errorf("")
 	}
 	//
-	return nil
+	return nil, nil
 }
