@@ -53,9 +53,8 @@ func (o *compress) GetUploads(uploadsPaginated UploadsPaginated) ([]VideoUploadI
 
 func (o *compress) GetSingleUpload( jobid int ) (*VideoUploadInfo, error) {
 	requestBody := jobidProgressRequest{
-		ClientId: o.GetCliendId(),
-		ApiKey: o.apiKey,
-		JobId: jobid,
+		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		JobId:     jobid,
 	}
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
@@ -83,10 +82,9 @@ func (o *compress) GetSingleUpload( jobid int ) (*VideoUploadInfo, error) {
  */
 func (o *compress) GetJobidProgress( jobid int ) (*VideoUploadInfo, error) {
 	requestBody := jobidProgressRequest{
-		ClientId: o.GetCliendId(),
-		ApiKey: o.apiKey,
-		JobId: jobid,
-	} 
+		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		JobId:     jobid,
+	}
 	//
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
