@@ -9,6 +9,7 @@ type ICompress interface {
 	HealthCheck() error
 	IsDebug() bool
 	GetUploads(uploadsPaginated UploadsPaginated) error
+	GetJobidProgress(requestBody jobidProgressRequest) (*VideoUploadInfo , error)
 	GetCategories(requestBody categoriesRequest) ([]Category, error)
 	CreateCategory( requestBody createCategoryRequest ) (*Category, error)
 	//

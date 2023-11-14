@@ -36,4 +36,33 @@ func (o *compress) GetUploads(uploadsPaginated UploadsPaginated) error {
 	return nil
 }
 
+/**
+* jobid is compulsory
+* example: get_single_upload(1000)
+* @param {string} api_key 
+* @param {number} jobid 
+* @returns upload list
+*/
 
+
+/**
+* 
+* @param {number} job_id 
+* @returns progressStateResponse 
+*/
+func (o *compress) GetJobidProgress(requestBody jobidProgressRequest) (*VideoUploadInfo , error) {
+	//
+	if errs := validator.Validate(requestBody); errs != nil {
+		// values not valid, deal with errors here
+		return errs
+	}
+	resp, err := o.restyPost(GET_UPLOADS(), nil)
+	if err != nil {
+		return err
+	}
+	o.debugPrint(resp)
+	if resp.IsError() {
+		return fmt.Errorf("")
+	}
+	return nil, 
+}

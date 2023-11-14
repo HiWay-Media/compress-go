@@ -46,3 +46,8 @@ type VideoUploadInfo struct {
 	DeletedAt           *time.Time  `json:"deleted_at,omitempty" gorm:"type:timestamp;"`
 	MiniClips           interface{} `json:"mini_clips" gorm:"-"`
 }
+
+type jobidProgressRequest struct {
+	BaseModel
+	JobId int `json:"job_id" validate:"nonzero,min=1" required:"true"`
+}
