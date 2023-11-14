@@ -2,6 +2,7 @@ package compress
 
 import (
 	"github.com/go-resty/resty/v2"
+	"fmt"
 )
 //
 type ICompress interface {
@@ -25,7 +26,13 @@ type compress struct {
 	apiKey 			string
 }
 //
-func NewCompress(customerName, apiKey string,isDebug bool) ICompress{
+func NewCompress(customerName, apiKey string,isDebug bool) ( ICompress, error ){
+	if customerName == "" {
+		return nil, fmt.Errof("customerName is compulsory")
+	}
+	if apiKey == "" {
+		return nil, fmt.Errof("apiKey is compulsory")
+	}
 	c := &compress{
 		debug: isDebug,
 		restClient: resty.New(),
@@ -37,3 +44,4 @@ func NewCompress(customerName, apiKey string,isDebug bool) ICompress{
 	//
 	return c
 }
+//
