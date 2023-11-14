@@ -57,3 +57,12 @@ type publishedUploadRequest struct {
 	JobId 		int `json:"job_id" validate:"nonzero,min=1" required:"true"`
 	Published 	int `json:"published" required:"true"`
 }
+
+/*type uploadS3Request struct { 
+	DestinationFolder string `json:"filename" validate:"nonzero,min=1" required:"true"`
+}*/
+
+type presignedObject struct {
+	CustomerName string `json:"customer_name" validate:"nonzero,min=1" required:"true"`
+	FileName string `json:"filename" validate:"nonzero,min=1" required:"true"`
+}

@@ -13,6 +13,7 @@ type ICompress interface {
 	GetSingleUpload(requestBody jobidProgressRequest) (*VideoUploadInfo , error)
 	GetJobidProgress(requestBody jobidProgressRequest) (*VideoUploadInfo , error)
 	SetPublishedUpload(requestBody publishedUploadRequest) (*VideoUploadInfo , error)
+	UploadS3( destinationFolder string, filename string,  ) error 
 	GetCategories(requestBody categoriesRequest) ([]Category, error)
 	CreateCategory( requestBody createCategoryRequest ) (*Category, error)
 	GetRestreamers( requestBody findRestreamersRequest ) ([]Restreamer, error)

@@ -37,4 +37,7 @@ var (
 		return TNGRM_BASE_URL+UPLOADS+"/set_published"
 	}
 	//
+	PRESIGNED_URL_S3 = func() string {
+		return TNGRM_BASE_URL+UPLOADS+"/presignedUrl"
+	}
 )

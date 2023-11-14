@@ -94,6 +94,7 @@ func (o *compress) GetJobidProgress(requestBody jobidProgressRequest) (*VideoUpl
 	}
 	return &obj, nil
 }
+
 /**
 * jobid is compulsory
 * example: set_published_upload(1000)
@@ -119,4 +120,32 @@ func (o *compress) SetPublishedUpload(requestBody publishedUploadRequest) (*Vide
 		return nil, err
 	}
 	return &obj, nil
+}
+
+/**
+* upload video to minio s3 bucket with a presigned PUT url
+*
+* videos will not be displayed in compress platform,
+*
+* this is just a plain upload to s3 storage
+* @param {string} destination_folder
+* @param {string} filename
+* @param {file} file
+*/
+func (o *compress) UploadS3( destinationFolder string, filename string, ) error {
+	var fileDest = destinationFolder + "/" + filename
+	o.debugPrint(fileDest)
+	resp, err := o.restyPost(PRESIGNED_URL_S3, presignedObject{
+		CustomerName: o.customerName,
+		FileName: fileDest
+	})
+	if err != nil {
+		return err
+	}
+	o.debugPrint(resp)
+	if resp.IsError() {
+		return fmt.Errorf("")
+	}
+	//
+	return nil
 }
