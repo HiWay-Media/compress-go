@@ -133,12 +133,14 @@ func (o *compress) SetPublishedUpload(requestBody publishedUploadRequest) (*Vide
 * @param {file} file
 */
 func (o *compress) UploadS3( destinationFolder string, filename string, ) error {
-	var fileDest = destinationFolder + "/" + filename
+	//
+	fileDest := destinationFolder + "/" + filename
 	o.debugPrint(fileDest)
-	resp, err := o.restyPost(PRESIGNED_URL_S3, presignedObject{
+	bodyPresigned := presignedObject{
 		CustomerName: o.customerName,
 		FileName: fileDest
-	})
+	}
+	resp, err := o.restyPost(PRESIGNED_URL_S3, bodyPresigned)
 	if err != nil {
 		return err
 	}
