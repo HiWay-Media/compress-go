@@ -2,7 +2,7 @@ package compress
 
 import (
 	"fmt"
-	"json"
+	"encoding/json"
 	"gopkg.in/validator.v2"
 )
 
