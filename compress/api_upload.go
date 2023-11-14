@@ -54,15 +54,15 @@ func (o *compress) GetJobidProgress(requestBody jobidProgressRequest) (*VideoUpl
 	//
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
-		return errs
+		return nil, errs
 	}
 	resp, err := o.restyPost(GET_UPLOADS(), nil)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	o.debugPrint(resp)
 	if resp.IsError() {
-		return fmt.Errorf("")
+		return nil, fmt.Errorf("")
 	}
-	return nil, 
+	return nil, fmt.Errorf("")
 }
