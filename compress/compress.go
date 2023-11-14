@@ -10,6 +10,7 @@ type ICompress interface {
 	IsDebug() bool
 	GetUploads(uploadsPaginated UploadsPaginated) error
 	GetCategories(requestBody categoriesRequest) ([]Category, error)
+	CreateCategory( requestBody createCategoryRequest ) (*Category, error)
 	//
 }
 //

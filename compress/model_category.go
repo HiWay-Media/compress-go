@@ -15,3 +15,8 @@ type Category struct {
 	VideoAmount int       `json:"video_amount" `
 	ClientID    string    `json:"client_id" `
 }
+
+type createCategoryRequest struct {
+	BaseModel
+	CategoryName string `json:"category_name" validate:"nonnil,min=1" required:"true"`
+}
