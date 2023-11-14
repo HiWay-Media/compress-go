@@ -44,7 +44,21 @@ func (o *compress) GetUploads(uploadsPaginated UploadsPaginated) error {
 * @returns upload list
 */
 
-
+func (o *compress) GetSingleUpload(requestBody jobidProgressRequest) (*VideoUploadInfo , error){
+	if errs := validator.Validate(requestBody); errs != nil {
+		// values not valid, deal with errors here
+		return nil, errs
+	}
+	resp, err := o.restyPost(GET_SINGLE_UPLOAD(requestBody.JobId), requestBody)
+	if err != nil {
+		return nil, err
+	}
+	o.debugPrint(resp)
+	if resp.IsError() {
+		return nil, fmt.Errorf("")
+	}
+	return nil, fmt.Errorf("")
+}
 /**
 * 
 * @param {number} job_id 
@@ -56,7 +70,7 @@ func (o *compress) GetJobidProgress(requestBody jobidProgressRequest) (*VideoUpl
 		// values not valid, deal with errors here
 		return nil, errs
 	}
-	resp, err := o.restyPost(GET_UPLOADS(), nil)
+	resp, err := o.restyPost(GET_JOBID_PROGRESS(requestBody.JobId), requestBody)
 	if err != nil {
 		return nil, err
 	}
