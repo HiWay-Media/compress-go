@@ -9,10 +9,9 @@ type UploadsPaginated struct {
 	TitleFilter *string `json:"q"`
 	Category    *string `json:"category"`
 	Tags        *string `json:"tags"`
-	FromDate    *string `json:"from_date", omitempty `
-	ToDate      *string `json:"to_date", omitempty `
+	FromDate    *string `json:"from_date,omitempty"`
+	ToDate      *string `json:"to_date,omitempty"`
 }
-
 
 // VideoUploadInfo single video upload representation for response, made with Upload, AuthUser and Category tables
 type VideoUploadInfo struct {
@@ -54,15 +53,15 @@ type jobidProgressRequest struct {
 
 type publishedUploadRequest struct {
 	BaseModel
-	JobId 		int `json:"job_id" validate:"nonzero,min=1" required:"true"`
-	Published 	int `json:"published" required:"true"`
+	JobId     int `json:"job_id" validate:"nonzero,min=1" required:"true"`
+	Published int `json:"published" required:"true"`
 }
 
-/*type uploadS3Request struct { 
+/*type uploadS3Request struct {
 	DestinationFolder string `json:"filename" validate:"nonzero,min=1" required:"true"`
 }*/
 
 type presignedObject struct {
 	CustomerName string `json:"customer_name" validate:"nonzero,min=1" required:"true"`
-	FileName string `json:"filename" validate:"nonzero,min=1" required:"true"`
+	FileName     string `json:"filename" validate:"nonzero,min=1" required:"true"`
 }

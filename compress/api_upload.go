@@ -1,8 +1,9 @@
 package compress
 
 import (
-	"fmt"
 	"encoding/json"
+	"fmt"
+
 	"gopkg.in/validator.v2"
 )
 
@@ -45,12 +46,12 @@ func (o *compress) GetUploads(uploadsPaginated UploadsPaginated) ([]VideoUploadI
 /**
 * jobid is compulsory
 * example: get_single_upload(1000)
-* @param {string} api_key 
-* @param {number} jobid 
+* @param {string} api_key
+* @param {number} jobid
 * @returns upload list
-*/
+ */
 
-func (o *compress) GetSingleUpload(requestBody jobidProgressRequest) (*VideoUploadInfo , error){
+func (o *compress) GetSingleUpload(requestBody jobidProgressRequest) (*VideoUploadInfo, error) {
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
 		return nil, errs
@@ -69,12 +70,13 @@ func (o *compress) GetSingleUpload(requestBody jobidProgressRequest) (*VideoUplo
 	}
 	return &obj, nil
 }
+
 /**
-* 
-* @param {number} job_id 
-* @returns progressStateResponse 
-*/
-func (o *compress) GetJobidProgress(requestBody jobidProgressRequest) (*VideoUploadInfo , error) {
+*
+* @param {number} job_id
+* @returns progressStateResponse
+ */
+func (o *compress) GetJobidProgress(requestBody jobidProgressRequest) (*VideoUploadInfo, error) {
 	//
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
@@ -98,10 +100,10 @@ func (o *compress) GetJobidProgress(requestBody jobidProgressRequest) (*VideoUpl
 /**
 * jobid is compulsory
 * example: set_published_upload(1000)
-* @param {string} api_key 
-* @param {number} jobid 
-*/
-func (o *compress) SetPublishedUpload(requestBody publishedUploadRequest) (*VideoUploadInfo , error) {
+* @param {string} api_key
+* @param {number} jobid
+ */
+func (o *compress) SetPublishedUpload(requestBody publishedUploadRequest) (*VideoUploadInfo, error) {
 	//
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
@@ -131,16 +133,16 @@ func (o *compress) SetPublishedUpload(requestBody publishedUploadRequest) (*Vide
 * @param {string} destination_folder
 * @param {string} filename
 * @param {file} file
-*/
-func (o *compress) UploadS3( destinationFolder string, filename string, ) error {
+ */
+func (o *compress) UploadS3(destinationFolder string, filename string) error {
 	//
 	fileDest := destinationFolder + "/" + filename
 	o.debugPrint(fileDest)
 	bodyPresigned := presignedObject{
 		CustomerName: o.customerName,
-		FileName: fileDest
+		FileName:     fileDest,
 	}
-	resp, err := o.restyPost(PRESIGNED_URL_S3, bodyPresigned)
+	resp, err := o.restyPost(PRESIGNED_URL_S3(), bodyPresigned)
 	if err != nil {
 		return err
 	}
