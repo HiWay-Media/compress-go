@@ -19,21 +19,26 @@ import (
 * @param {string} location_place
 * @param {number} category_id
  */
-func (o *compress) GetUploads(uploadsPaginated UploadsPaginated) error {
+func (o *compress) GetUploads(uploadsPaginated UploadsPaginated) ([]VideoUploadInfo, error) {
 	//
 	if errs := validator.Validate(uploadsPaginated); errs != nil {
 		// values not valid, deal with errors here
-		return errs
+		return nil, errs
 	}
 	resp, err := o.restyPost(GET_UPLOADS(), nil)
 	if err != nil {
-		return err
+		return nil, err
 	}
 	o.debugPrint(resp)
 	if resp.IsError() {
-		return fmt.Errorf("")
+		return nil, fmt.Errorf("")
 	}
-	return nil
+	var obj []VideoUploadInfo
+	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
+		return nil, err
+	}
+	o.debugPrint(obj)
+	return obj, nil
 }
 
 /**
@@ -57,7 +62,11 @@ func (o *compress) GetSingleUpload(requestBody jobidProgressRequest) (*VideoUplo
 	if resp.IsError() {
 		return nil, fmt.Errorf("")
 	}
-	return nil, fmt.Errorf("")
+	var obj VideoUploadInfo
+	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
+		return nil, err
+	}
+	return obj, nil
 }
 /**
 * 
@@ -78,5 +87,9 @@ func (o *compress) GetJobidProgress(requestBody jobidProgressRequest) (*VideoUpl
 	if resp.IsError() {
 		return nil, fmt.Errorf("")
 	}
-	return nil, fmt.Errorf("")
+	var obj VideoUploadInfo
+	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
+		return nil, err
+	}
+	return obj, nil
 }
