@@ -12,8 +12,17 @@ var (
 	GET_CATEGORIES = func() string {
 		return TNGRM_BASE_URL+CATEGORIES
 	}
+	CREATE_CATEGORY = func(name string) string{
+		return TNGRM_BASE_URL+CATEGORIES + "/create"
+	}
 	GET_RESTREAMERS = func() string {
 		return TNGRM_BASE_URL+RESTREAMERS
+	}
+	GET_RUNNING_INSTANCES = func() string {
+		return TNGRM_BASE_URL+RESTREAMERS+"/running_instances"
+	}
+	GET_RUNNING_SINGLE_INSTANCE = func() string {
+		return TNGRM_BASE_URL+RESTREAMERS+"/single_instance"
 	}
 	GET_UPLOADS = func() string {
 		return TNGRM_BASE_URL+UPLOADS
