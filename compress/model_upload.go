@@ -51,3 +51,9 @@ type jobidProgressRequest struct {
 	BaseModel
 	JobId int `json:"job_id" validate:"nonzero,min=1" required:"true"`
 }
+
+type publishedUploadRequest struct {
+	BaseModel
+	JobId 		int `json:"job_id" validate:"nonzero,min=1" required:"true"`
+	Published 	int `json:"published" required:"true"`
+}

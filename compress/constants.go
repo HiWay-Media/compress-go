@@ -31,7 +31,10 @@ var (
 		return TNGRM_BASE_URL+UPLOADS+"/jobid"
 	}
 	GET_JOBID_PROGRESS = func(jobId int) string {
-		return TNGRM_BASE_URL+UPLOADS+"job_progress/jobid"
+		return TNGRM_BASE_URL+UPLOADS+"/job_progress/jobid"
+	}
+	SET_PUBLISHED_UPLOAD = func(jobId int) string {
+		return TNGRM_BASE_URL+UPLOADS+"/set_published"
 	}
 	//
 )

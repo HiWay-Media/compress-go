@@ -94,3 +94,29 @@ func (o *compress) GetJobidProgress(requestBody jobidProgressRequest) (*VideoUpl
 	}
 	return &obj, nil
 }
+/**
+* jobid is compulsory
+* example: set_published_upload(1000)
+* @param {string} api_key 
+* @param {number} jobid 
+*/
+func (o *compress) SetPublishedUpload(requestBody publishedUploadRequest) (*VideoUploadInfo , error) {
+	//
+	if errs := validator.Validate(requestBody); errs != nil {
+		// values not valid, deal with errors here
+		return nil, errs
+	}
+	resp, err := o.restyPost(SET_PUBLISHED_UPLOAD(requestBody.JobId), requestBody)
+	if err != nil {
+		return nil, err
+	}
+	o.debugPrint(resp)
+	if resp.IsError() {
+		return nil, fmt.Errorf("")
+	}
+	var obj VideoUploadInfo
+	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
+		return nil, err
+	}
+	return &obj, nil
+}
