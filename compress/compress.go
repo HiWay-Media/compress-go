@@ -14,6 +14,7 @@ type ICompress interface {
 	SetPublishedUpload(requestBody publishedUploadRequest) (*VideoUploadInfo , error)
 	GetCategories(requestBody categoriesRequest) ([]Category, error)
 	CreateCategory( requestBody createCategoryRequest ) (*Category, error)
+	GetRestreamers( requestBody findRestreamersRequest ) ([]Restreamer, error)
 	//
 }
 //
