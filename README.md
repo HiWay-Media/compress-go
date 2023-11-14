@@ -27,7 +27,7 @@ go get github.com/HiWay-Media/compress-go
 ## Usage
 Here's a quick example of how to use Compress-Go
 
-## Contributing
+## Contributing
 Contributions are welcome! If you would like to contribute to this project, please follow these steps:
 
 ## Fork the repository.
