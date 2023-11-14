@@ -67,7 +67,7 @@ func (o *compress) GetSingleUpload(requestBody jobidProgressRequest) (*VideoUplo
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
 		return nil, err
 	}
-	return obj, nil
+	return &obj, nil
 }
 /**
 * 
@@ -92,5 +92,5 @@ func (o *compress) GetJobidProgress(requestBody jobidProgressRequest) (*VideoUpl
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
 		return nil, err
 	}
-	return obj, nil
+	return &obj, nil
 }
