@@ -1,7 +1,7 @@
 # compress-go
 [![Go build](https://github.com/HiWay-Media/compress-go/actions/workflows/go-build.yml/badge.svg)](https://github.com/HiWay-Media/compress-go/actions/workflows/go-build.yml)
 [![Go test workflow](https://github.com/HiWay-Media/compress-go/actions/workflows/go-test.yml/badge.svg)](https://github.com/HiWay-Media/compress-go/actions/workflows/go-test.yml)
-ad
+
 The Compress Go lang library provides access to the Compress API for encoding videos, restreamers
 
 ## Table of Contents
