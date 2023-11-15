@@ -10,6 +10,7 @@ type ICompress interface {
 	//
 	HealthCheck() error
 	IsDebug() bool
+	GetCredentials() (ResponseServer, error)
 	GetUploads(uploadsPaginated UploadsPaginated) ([]VideoUploadInfo, error)
 	GetSingleUpload( jobid int ) (*VideoUploadInfo, error)
 	GetJobidProgress( jobid int ) (*VideoUploadInfo, error)
@@ -43,6 +44,11 @@ func NewCompress(customerName, apiKey string, isDebug bool) (ICompress, error) {
 	}
 	c.restClient.SetBaseURL(TNGRM_BASE_URL)
 	c.restClient.SetDebug(isDebug)
+	//
+	_, err := c.GetCredentials()
+	if err != nil {
+		return nil, err
+	}
 	//
 	return c, nil
 }

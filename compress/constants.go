@@ -5,6 +5,7 @@ const (
 	CATEGORIES                 	   	= "/external/upload/categories"
 	RESTREAMERS                		= "/external/restreamers"
 	UPLOADS                    		= "/external/upload"
+	CREDENTIALS 					= "/external/credentials/"
 )
 //
 var (
@@ -36,8 +37,8 @@ var (
 	SET_PUBLISHED_UPLOAD = func(jobId int) string {
 		return TNGRM_BASE_URL+UPLOADS+"/set_published"
 	}
-	//
 	PRESIGNED_URL_S3 = func() string {
 		return TNGRM_BASE_URL+UPLOADS+"/presignedUrl"
 	}
+	//
 )

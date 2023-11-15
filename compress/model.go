@@ -5,3 +5,9 @@ type BaseModel struct {
 	ClientId   	string `json:"client_id"`
 	ApiKey 		string `json:"api_key"`
 }
+
+type ResponseServer struct {
+	Message  string      `json:"message"`
+	Response string      `json:"response"`
+	Data     interface{} `json:"data"`
+}
