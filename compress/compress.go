@@ -10,7 +10,7 @@ type ICompress interface {
 	//
 	HealthCheck() error
 	IsDebug() bool
-	GetCredentials() (ResponseServer, error)
+	GetCredentials() (*ResponseServer, error)
 	GetUploads(uploadsPaginated UploadsPaginated) ([]VideoUploadInfo, error)
 	GetSingleUpload( jobid int ) (*VideoUploadInfo, error)
 	GetJobidProgress( jobid int ) (*VideoUploadInfo, error)

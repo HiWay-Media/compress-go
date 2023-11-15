@@ -6,7 +6,7 @@ import (
 )
 
 
-func (o *compress) GetCredentials() (ResponseServer, error) {
+func (o *compress) GetCredentials() (*ResponseServer, error) {
 	//
 	resp, err := o.restyPost(CREDENTIALS, BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey})
 	if err != nil {
@@ -21,5 +21,5 @@ func (o *compress) GetCredentials() (ResponseServer, error) {
 		return nil, err
 	}
 	o.debugPrint(obj)
-	return obj, nil
+	return &obj, nil
 }
