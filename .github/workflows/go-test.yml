@@ -3,6 +3,11 @@ on: [push]
 #
 env:
   APP_ENV: runner
+  # Setting an environment variable with the value of a configuration variable
+  API_KEY: ${{ secrets.API_KEY }}
+  # Setting an environment variable with the value of a configuration variable
+  CUSTOMER_NAME: ${{ secrets.CUSTOMER_NAME }}
+  #
 #
 jobs:
   build:
