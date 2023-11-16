@@ -1,23 +1,23 @@
 package compress
 
 import (
-	"fmt"
 	"encoding/json"
+	"fmt"
 	"gopkg.in/validator.v2"
 )
 
 /**
-* 
-* @param {number} start_from 
-* @param {number} amount 
+*
+* @param {number} start_from
+* @param {number} amount
 * @returns restreamer list
-*/
+ */
 
-func (o *compress) GetRestreamers( startFrom, amount int ) ([]Restreamer, error) {
+func (o *compress) GetRestreamers(startFrom, amount int) ([]Restreamer, error) {
 	requestBody := findRestreamersRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		StartFrom: startFrom,
-		Amount: amount,
+		Amount:    amount,
 	}
 	//
 	if errs := validator.Validate(requestBody); errs != nil {
@@ -39,15 +39,15 @@ func (o *compress) GetRestreamers( startFrom, amount int ) ([]Restreamer, error)
 	o.debugPrint(obj)
 	return obj, nil
 }
-  
+
 /**
-* 
+*
 * @returns restreamer object
-*/
-func (o *compress) GetSingleRestreamer( instanceName string ) (*Restreamer, error) {
+ */
+func (o *compress) GetSingleRestreamer(instanceName string) (*Restreamer, error) {
 	//
 	requestBody := restreamerRequest{
-		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		InstanceName: instanceName,
 	}
 	if errs := validator.Validate(requestBody); errs != nil {

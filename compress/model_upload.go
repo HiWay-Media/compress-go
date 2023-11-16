@@ -65,3 +65,31 @@ type presignedObject struct {
 	CustomerName string `json:"customer_name" validate:"nonzero,min=1" required:"true"`
 	FileName     string `json:"filename" validate:"nonzero,min=1" required:"true"`
 }
+
+type responseMinioPresigned struct {
+	Message  string      `json:"message"`
+	Response string      `json:"response"`
+	Data     interface{} `json:"data"`
+}
+
+type createUploadByApikeyRequest struct {
+	Apikey        string `json:"api_key"`
+	Filename      string `json:"filename"`
+	Size          int    `json:"size"`
+	Category      int    `json:"category"`
+	Title         string `json:"title"`
+	Tags          string `json:"tags"`
+	Location      string `json:"location"`
+	ReportedEmail string `json:"reporter_email"`
+}
+
+type minioUploadPresignedByApikeyRequest struct {
+	Customer string `json:"customer"`
+	FileName string `json:"filename"`
+}
+
+type ResponseUpload struct {
+	Data     string `json:"data"`
+	Message  string `json:"message"`
+	Response string `json:"response"`
+}
