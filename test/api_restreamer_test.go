@@ -14,12 +14,15 @@ func TestGetRestreamers(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 	// need to be finish
-	restreamers, err := c.GetRestreamers(1, 20)
+	restreamers, err := c.GetRestreamers()
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
 	log.Println("restreamers ", restreamers)
 	//c.IsDebug()
+	//
+	//restreamer, err := c.GetSingleRestreamer(restreamers[0].name)
+	//
 }
 
 
