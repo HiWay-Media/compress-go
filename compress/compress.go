@@ -14,11 +14,11 @@ type ICompress interface {
 	GetUploads(uploadsPaginated UploadsPaginated) ([]VideoUploadInfo, error) // need to change it with args
 	GetSingleUpload(jobid int) (*VideoUploadInfo, error)
 	GetJobidProgress(jobid int) (*VideoUploadInfo, error)
-	SetPublishedUpload(jobid, published int) (*VideoUploadInfo, error)
+	SetPublishedUpload(jobid int, published int) (*VideoUploadInfo, error)
 	Upload(file []byte, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error)
 	GetCategories() ([]Category, error)
 	CreateCategory(name string) (*Category, error)
-	GetRestreamers(startFrom, amount int) ([]Restreamer, error)
+	GetRestreamers(startFrom int, amount int) ([]Restreamer, error)
 	GetSingleRestreamer(instanceName string) (*Restreamer, error)
 }
 

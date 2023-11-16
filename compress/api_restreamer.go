@@ -11,10 +11,9 @@ import (
 * @param {number} start_from
 * @param {number} amount
 * @returns restreamer list
- */
-
-func (o *compress) GetRestreamers(startFrom, amount int) ([]Restreamer, error) {
-	requestBody := findRestreamersRequest{
+*/
+func (o *compress) GetRestreamers(startFrom int, amount int) ([]Restreamer, error) {
+	requestBody := &findRestreamersRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		StartFrom: startFrom,
 		Amount:    amount,
@@ -46,7 +45,7 @@ func (o *compress) GetRestreamers(startFrom, amount int) ([]Restreamer, error) {
  */
 func (o *compress) GetSingleRestreamer(instanceName string) (*Restreamer, error) {
 	//
-	requestBody := restreamerRequest{
+	requestBody := &restreamerRequest{
 		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		InstanceName: instanceName,
 	}

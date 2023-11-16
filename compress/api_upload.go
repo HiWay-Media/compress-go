@@ -20,7 +20,7 @@ import (
 * @param {string} tags
 * @param {string} location_place
 * @param {number} category_id
- */
+*/
 func (o *compress) GetUploads(uploadsPaginated UploadsPaginated) ([]VideoUploadInfo, error) {
 	//
 	if errs := validator.Validate(uploadsPaginated); errs != nil {
@@ -50,7 +50,6 @@ func (o *compress) GetUploads(uploadsPaginated UploadsPaginated) ([]VideoUploadI
 * @param {number} jobid
 * @returns upload list
  */
-
 func (o *compress) GetSingleUpload(jobid int) (*VideoUploadInfo, error) {
 	requestBody := &jobidProgressRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
@@ -111,7 +110,7 @@ func (o *compress) GetJobidProgress(jobid int) (*VideoUploadInfo, error) {
 * @param {string} api_key
 * @param {number} jobid
  */
-func (o *compress) SetPublishedUpload(jobid, published int) (*VideoUploadInfo, error) {
+func (o *compress) SetPublishedUpload(jobid int, published int) (*VideoUploadInfo, error) {
 	if published > 1 && published < 0 {
 		return nil, fmt.Errorf("published need to be 0 or 1")
 	}
