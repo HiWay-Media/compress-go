@@ -3,7 +3,6 @@ package compress
 import (
 	"os"
 	"testing"
-	"fmt"
 )
 
 func TestNewCompress(t *testing.T) {
@@ -21,7 +20,7 @@ func GetCompress() ( ICompress, error ) {
 	apiKey 			:= os.Getenv("API_KEY")
 	customerName	:= os.Getenv("CUSTOMER_NAME")
 	//
-	c, err := &NewCompress(customerName, apiKey, false)
+	c, err := NewCompress(customerName, apiKey, false)
 	if err != nil {
 		return nil, err
 	}
