@@ -15,12 +15,11 @@ type ICompress interface {
 	GetSingleUpload(jobid int) (*VideoUploadInfo, error)
 	GetJobidProgress(jobid int) (*VideoUploadInfo, error)
 	SetPublishedUpload(jobid, published int) (*VideoUploadInfo, error)
-	UploadS3(destinationFolder string, filename string) error
+	Upload(file []byte, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error)
 	GetCategories() ([]Category, error)
 	CreateCategory(name string) (*Category, error)
 	GetRestreamers(startFrom, amount int) ([]Restreamer, error)
 	GetSingleRestreamer(instanceName string) (*Restreamer, error)
-	//
 }
 
 type compress struct {
