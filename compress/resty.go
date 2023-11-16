@@ -13,7 +13,7 @@ func (o *compress) HealthCheck() error {
 		return err
 	}
 	if resp.IsError() {
-		return fmt.Errorf("")
+		return fmt.Errorf("healthcheck error")
 	}
 	return nil
 }
