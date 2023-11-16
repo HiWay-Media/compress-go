@@ -27,10 +27,14 @@ func (o *compress) GetCategories() ([]Category, error) {
 	}
 	o.debugPrint(resp)
 	if resp.IsError() {
-		return nil, fmt.Errorf("")
+		return nil, fmt.Errorf("categories error")
+	}
+	var obj []Category
+	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
+		return nil, err
 	}
 	//
-	return nil, nil
+	return resp, nil
 }
 
 /**
