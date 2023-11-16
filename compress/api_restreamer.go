@@ -17,7 +17,7 @@ func (o *compress) GetRestreamers( startFrom, amount int ) ([]Restreamer, error)
 	requestBody := findRestreamersRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		StartFrom: startFrom,
-		Amount: amount
+		Amount: amount,
 	}
 	//
 	if errs := validator.Validate(requestBody); errs != nil {
