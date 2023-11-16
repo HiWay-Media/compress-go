@@ -35,7 +35,7 @@ func (o *compress) GetCategories() ([]Category, error) {
 		return nil, err
 	}
 	//
-	return resp, nil
+	return obj, nil
 }
 
 /**
