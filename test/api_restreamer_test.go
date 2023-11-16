@@ -20,7 +20,7 @@ func TestGetRestreamers(t *testing.T) {
 	//log.Println("restreamers ", restreamers)
 	//c.IsDebug()
 	//
-	_, err := c.GetSingleRestreamer(restreamers[0].Name)
+	_, err = c.GetSingleRestreamer(restreamers[0].Name)
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
