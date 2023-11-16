@@ -88,7 +88,8 @@ type minioUploadPresignedByApikeyRequest struct {
 	FileName string `json:"filename"`
 }
 
-type responseUpload struct {
+type ResponseUpload struct {
+	Data     string `json:"data"`
 	Message  string `json:"message"`
 	Response string `json:"response"`
 }

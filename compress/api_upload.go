@@ -132,38 +132,20 @@ func (o *compress) SetPublishedUpload(requestBody publishedUploadRequest) (*Vide
 }
 
 /**
-* upload video to minio s3 bucket with a presigned PUT url
-*
-* videos will not be displayed in compress platform,
-*
-* this is just a plain upload to s3 storage
-* @param {string} destination_folder
+* upload file to compress
+* gets signed url from minio, uploads and finally creates the upload record.
+* @param {string} file
+* @param {string} size
+* @param {int} categoryId
+* @param {string} title
+* @param {string} tags
+* @param {string} location
 * @param {string} filename
-* @param {file} file
+* @param {string} targetFolder
  */
-func (o *compress) UploadS3(destinationFolder string, filename string) error {
-	//
-	fileDest := destinationFolder + "/" + filename
-	o.debugPrint(fileDest)
-	bodyPresigned := presignedObject{
-		CustomerName: o.customerName,
-		FileName:     fileDest,
-	}
-	resp, err := o.restyPost(PRESIGNED_URL_S3(), bodyPresigned)
-	if err != nil {
-		return err
-	}
-	o.debugPrint(resp)
-	if resp.IsError() {
-		return fmt.Errorf("")
-	}
-	//
-	return nil
-}
-
-func (o *compress) Upload(apikey string, file []byte, size int64, customer string, categoryId int, title string, tags string, location string, filename string, targetFolder string) (any, error) {
+func (o *compress) Upload(file []byte, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error) {
 	bucketFolderDestination := targetFolder + "/" + filename
-	responsePresignedUrl, err := o.getMinioURL(bucketFolderDestination, customer)
+	responsePresignedUrl, err := o.getMinioURL(bucketFolderDestination, o.customerName)
 	if err != nil {
 		return nil, err
 	}
@@ -181,20 +163,20 @@ func (o *compress) Upload(apikey string, file []byte, size int64, customer strin
 		return nil, fmt.Errorf("upload to s3 bucket failed!, err: %s", err.Error())
 	}
 
-	responseCreateUploadAndEncode, err := o.createUpload(apikey, bucketFolderDestination, size, categoryId, title, tags, location, customer)
+	responseCreateUploadAndEncode, err := o.createUpload(o.apiKey, bucketFolderDestination, size, categoryId, title, tags, location, o.customerName)
 	if err != nil {
 		return nil, err
 	}
 
-	if responseCreateUploadAndEncode.Message != "OK" {
+	if responseCreateUploadAndEncode.Response != "OK" {
 		return nil, fmt.Errorf("something went wrong during create upload and encode, err: %s %s", responseCreateUploadAndEncode.Message, responseCreateUploadAndEncode.Response)
 	}
 
 	return responseCreateUploadAndEncode, nil
 }
 
-func (o *compress) createUpload(apikey string, bucketFolderDestination string, size int64, categoryId int, title string, tags string, location string, customer string) (*responseUpload, error) {
-	var ru responseUpload
+func (o *compress) createUpload(apikey string, bucketFolderDestination string, size int64, categoryId int, title string, tags string, location string, customer string) (*ResponseUpload, error) {
+	var ru ResponseUpload
 	_, err := o.restClient.R().
 		SetHeader("Content-Type", "application/json").
 		SetBody(&createUploadByApikeyRequest{

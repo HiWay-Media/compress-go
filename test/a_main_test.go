@@ -19,7 +19,6 @@ func TestMain(m *testing.M) {
 }
 
 func TestNewCompress(t *testing.T) {
-	//
 	c, err := GetCompress()
 	if err != nil {
 		t.Fatalf(err.Error())
@@ -28,14 +27,12 @@ func TestNewCompress(t *testing.T) {
 }
 
 func GetCompress() (compress.ICompress, error) {
-	//
 	apiKey := os.Getenv("API_KEY")
 	customerName := os.Getenv("CUSTOMER_NAME")
-	//
+
 	c, err := compress.NewCompress(customerName, apiKey, false)
 	if err != nil {
 		return nil, err
 	}
-	//
 	return c, nil
 }
