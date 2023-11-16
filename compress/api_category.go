@@ -41,7 +41,11 @@ func (o *compress) GetCategories() ([]Category, error) {
 * @param {string} customer
 * @returns list of categories of the customer
 */
-func (o *compress) CreateCategory( requestBody createCategoryRequest ) (*Category, error) {
+func (o *compress) CreateCategory( name string ) (*Category, error) {
+	requestBody := &createCategoryRequest{
+		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		CategoryName: name,
+	}
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
 		return nil, errs

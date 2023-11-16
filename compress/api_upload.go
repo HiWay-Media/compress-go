@@ -118,7 +118,7 @@ func (o *compress) SetPublishedUpload( jobid, published int  ) (*VideoUploadInfo
 	requestBody := &publishedUploadRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		JobId:     jobid,
-		Published: published
+		Published: published,
 	}
 	//
 	if errs := validator.Validate(requestBody); errs != nil {

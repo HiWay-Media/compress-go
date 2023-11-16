@@ -17,7 +17,7 @@ type ICompress interface {
 	SetPublishedUpload( jobid, published int ) (*VideoUploadInfo, error)
 	UploadS3(destinationFolder string, filename string) error
 	GetCategories() ([]Category, error)
-	CreateCategory(requestBody createCategoryRequest) (*Category, error)
+	CreateCategory( name string ) (*Category, error)
 	GetRestreamers( startFrom, amount int ) ([]Restreamer, error)
 	GetSingleRestreamer( instanceName string ) (*Restreamer, error)
 	//
