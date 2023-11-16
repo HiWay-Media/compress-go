@@ -12,7 +12,7 @@ func TestNewCompress(t *testing.T) {
 	//
 	c, err := NewCompress(customerName, apiKey, false)
 	if err != nil {
-		t.Falf(err.Error())
+		t.Fatalf(err.Error())
 	}
 	c.IsDebug()
 }
