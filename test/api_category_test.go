@@ -1,16 +1,21 @@
 package test
 
 import (
+	"log"
 	"testing"
 )
 
 func TestGetCategories(t *testing.T) {
 	//
-	_, err := GetCompress()
+	c, err := GetCompress()
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
 	// need to be finish
-	//c.GetCategories()
+	categories, err := c.GetCategories()
+	if err != nil {
+		t.Fatalf(err.Error())
+	}
+	log.Println("categories ", categories)
 	//c.IsDebug()
 }

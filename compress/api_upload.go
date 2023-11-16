@@ -3,6 +3,7 @@ package compress
 import (
 	"encoding/json"
 	"fmt"
+
 	"gopkg.in/validator.v2"
 )
 
@@ -51,7 +52,7 @@ func (o *compress) GetUploads(uploadsPaginated UploadsPaginated) ([]VideoUploadI
  */
 
 func (o *compress) GetSingleUpload(jobid int) (*VideoUploadInfo, error) {
-	requestBody := jobidProgressRequest{
+	requestBody := &jobidProgressRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		JobId:     jobid,
 	}
@@ -80,7 +81,7 @@ func (o *compress) GetSingleUpload(jobid int) (*VideoUploadInfo, error) {
 * @returns progressStateResponse
  */
 func (o *compress) GetJobidProgress(jobid int) (*VideoUploadInfo, error) {
-	requestBody := jobidProgressRequest{
+	requestBody := &jobidProgressRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		JobId:     jobid,
 	}
@@ -110,7 +111,15 @@ func (o *compress) GetJobidProgress(jobid int) (*VideoUploadInfo, error) {
 * @param {string} api_key
 * @param {number} jobid
  */
-func (o *compress) SetPublishedUpload(requestBody publishedUploadRequest) (*VideoUploadInfo, error) {
+func (o *compress) SetPublishedUpload(jobid, published int) (*VideoUploadInfo, error) {
+	if published > 1 && published < 0 {
+		return nil, fmt.Errorf("published need to be 0 or 1")
+	}
+	requestBody := &publishedUploadRequest{
+		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		JobId:     jobid,
+		Published: published,
+	}
 	//
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
@@ -132,85 +141,31 @@ func (o *compress) SetPublishedUpload(requestBody publishedUploadRequest) (*Vide
 }
 
 /**
-* upload file to compress
-* gets signed url from minio, uploads and finally creates the upload record.
-* @param {string} file
-* @param {string} size
-* @param {int} categoryId
-* @param {string} title
-* @param {string} tags
-* @param {string} location
+* upload video to minio s3 bucket with a presigned PUT url
+*
+* videos will not be displayed in compress platform,
+*
+* this is just a plain upload to s3 storage
+* @param {string} destination_folder
 * @param {string} filename
-* @param {string} targetFolder
+* @param {file} file
  */
-func (o *compress) Upload(file []byte, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error) {
-	bucketFolderDestination := targetFolder + "/" + filename
-	responsePresignedUrl, err := o.getMinioURL(bucketFolderDestination, o.customerName)
+func (o *compress) UploadS3(destinationFolder string, filename string) error {
+	//
+	fileDest := destinationFolder + "/" + filename
+	o.debugPrint(fileDest)
+	bodyPresigned := presignedObject{
+		CustomerName: o.customerName,
+		FileName:     fileDest,
+	}
+	resp, err := o.restyPost(PRESIGNED_URL_S3(), bodyPresigned)
 	if err != nil {
-		return nil, err
+		return err
 	}
-
-	response, err := o.restClient.R().
-		SetResult(&struct{}{}).
-		SetBody(file).
-		Put(responsePresignedUrl.Message)
-
-	if err != nil {
-		return nil, fmt.Errorf("something went wrong during upload to s3 bucket, err: %s", err.Error())
+	o.debugPrint(resp)
+	if resp.IsError() {
+		return fmt.Errorf("")
 	}
-
-	if !response.IsSuccess() {
-		return nil, fmt.Errorf("upload to s3 bucket failed!, err: %s", err.Error())
-	}
-
-	responseCreateUploadAndEncode, err := o.createUpload(o.apiKey, bucketFolderDestination, size, categoryId, title, tags, location, o.customerName)
-	if err != nil {
-		return nil, err
-	}
-
-	if responseCreateUploadAndEncode.Response != "OK" {
-		return nil, fmt.Errorf("something went wrong during create upload and encode, err: %s %s", responseCreateUploadAndEncode.Message, responseCreateUploadAndEncode.Response)
-	}
-
-	return responseCreateUploadAndEncode, nil
-}
-
-func (o *compress) createUpload(apikey string, bucketFolderDestination string, size int64, categoryId int, title string, tags string, location string, customer string) (*ResponseUpload, error) {
-	var ru ResponseUpload
-	_, err := o.restClient.R().
-		SetHeader("Content-Type", "application/json").
-		SetBody(&createUploadByApikeyRequest{
-			Filename:      bucketFolderDestination,
-			Size:          int(size),
-			Category:      categoryId,
-			Title:         title,
-			Tags:          tags,
-			Location:      location,
-			ReportedEmail: fmt.Sprintf("%s@tngrm.io", customer),
-			Apikey:        apikey,
-		}).
-		SetResult(&ru).
-		Post(CREATE_UPLOAD())
-	return &ru, err
-}
-
-func (o *compress) getMinioURL(bucketFolderDestination string, customer string) (*responseMinioPresigned, error) {
-	response, err := o.restClient.R().
-		SetHeader("Content-Type", "application/json").
-		SetBody(&minioUploadPresignedByApikeyRequest{
-			Customer: customer,
-			FileName: bucketFolderDestination,
-		}).
-		SetResult(&responseMinioPresigned{}).
-		Post(PRESIGNED_URL_S3())
-	if err != nil {
-		return nil, err
-	}
-	responsePresignedUrl := response.Result().(*responseMinioPresigned)
-
-	if responsePresignedUrl.Response != "OK" {
-		return nil, fmt.Errorf("something went wrong with getting presigned url minio, err: %s %s", responsePresignedUrl.Response, responsePresignedUrl.Message)
-	}
-
-	return responsePresignedUrl, nil
+	//
+	return nil
 }

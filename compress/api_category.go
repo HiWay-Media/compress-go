@@ -12,7 +12,10 @@ import (
 * @returns list of categories of the customer
  */
 
-func (o *compress) GetCategories(requestBody categoriesRequest) ([]Category, error) {
+func (o *compress) GetCategories() ([]Category, error) {
+	requestBody := &categoriesRequest{
+		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+	}
 	//
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
@@ -36,7 +39,11 @@ func (o *compress) GetCategories(requestBody categoriesRequest) ([]Category, err
 * @param {string} customer
 * @returns list of categories of the customer
  */
-func (o *compress) CreateCategory(requestBody createCategoryRequest) (*Category, error) {
+func (o *compress) CreateCategory(name string) (*Category, error) {
+	requestBody := &createCategoryRequest{
+		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		CategoryName: name,
+	}
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
 		return nil, errs
