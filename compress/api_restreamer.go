@@ -30,7 +30,7 @@ func (o *compress) GetRestreamers(startFrom, amount int) ([]Restreamer, error) {
 	}
 	o.debugPrint(resp)
 	if resp.IsError() {
-		return nil, fmt.Errorf("")
+		return nil, fmt.Errorf("restreamers error")
 	}
 	var obj []Restreamer
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
