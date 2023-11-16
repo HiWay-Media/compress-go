@@ -3,7 +3,6 @@ package compress
 import (
 	"os"
 	"testing"
-	"fmt"
 )
 
 func TestNewCompress(t *testing.T) {
