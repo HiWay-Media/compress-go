@@ -79,3 +79,8 @@ type findRestreamersRequest struct {
 	StartFrom int    `json:"start_from"  validate:"nonil,min=0" required:"true"`
 	Amount    int    `json:"amount"  validate:"nonnil,min=0" required:"true"`
 }
+
+type restreamerRequest struct {
+	BaseModel
+	InstanceName string `json:"instance_name"  validate:"nonzero,min=1" required:"true"`
+}

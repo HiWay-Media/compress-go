@@ -34,3 +34,29 @@ func (o *compress) GetRestreamers( requestBody findRestreamersRequest ) ([]Restr
 	o.debugPrint(obj)
 	return obj, nil
 }
+  
+/**
+* 
+* @returns restreamer object
+*/
+func (o *compress) GetSingleRestreamer( instanceName string ) (*Restreamer, error) {
+	//
+	requestBody := restreamerRequest{
+		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		InstanceName: instanceName,
+	}
+	if errs := validator.Validate(requestBody); errs != nil {
+		// values not valid, deal with errors here
+		return nil, errs
+	}
+	resp, err := o.restyPost(GET_RUNNING_SINGLE_INSTANCE(), requestBody)
+	if err != nil {
+		return nil, err
+	}
+	var obj Restreamer
+	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
+		return nil, err
+	}
+	o.debugPrint(obj)
+	return &obj, nil
+}
