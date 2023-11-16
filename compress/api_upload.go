@@ -113,7 +113,7 @@ func (o *compress) GetJobidProgress( jobid int ) (*VideoUploadInfo, error) {
  */
 func (o *compress) SetPublishedUpload( jobid, published int  ) (*VideoUploadInfo, error) {
 	if published > 1 && published < 0{
-		return fmt.Errorf("published need to be 0 or 1")
+		return nil, fmt.Errorf("published need to be 0 or 1")
 	}
 	requestBody := &publishedUploadRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
