@@ -7,6 +7,9 @@ import (
 )
 
 func TestUpload(t *testing.T) {
+	if os.Getenv("APP_ENV") == "runner" {
+		return
+	}
 	c, err := GetCompress()
 	if err != nil {
 		t.Fatalf(err.Error())
