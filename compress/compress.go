@@ -11,14 +11,14 @@ type ICompress interface {
 	HealthCheck() error
 	IsDebug() bool
 	GetCredentials() (*ResponseServer, error)
-	GetUploads(uploadsPaginated UploadsPaginated) ([]VideoUploadInfo, error)
+	GetUploads(uploadsPaginated UploadsPaginated) ([]VideoUploadInfo, error) // need to change it with args
 	GetSingleUpload( jobid int ) (*VideoUploadInfo, error)
 	GetJobidProgress( jobid int ) (*VideoUploadInfo, error)
 	SetPublishedUpload(requestBody publishedUploadRequest) (*VideoUploadInfo, error)
 	UploadS3(destinationFolder string, filename string) error
 	GetCategories(requestBody categoriesRequest) ([]Category, error)
 	CreateCategory(requestBody createCategoryRequest) (*Category, error)
-	GetRestreamers(requestBody findRestreamersRequest) ([]Restreamer, error)
+	GetRestreamers( startFrom, amount int ) ([]Restreamer, error)
 	GetSingleRestreamer( instanceName string ) (*Restreamer, error)
 	//
 }
