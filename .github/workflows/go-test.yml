@@ -23,6 +23,7 @@ jobs:
         with:
           go-version: ${{ matrix.go-version }}
           cache: true
+          cache-dependency-path: subdir/go.sum
       #
       # You can test your matrix by printing the current Go version
       - name: Display Go version
