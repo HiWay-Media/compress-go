@@ -3,6 +3,8 @@ package test
 import (
 	"os"
 	"testing"
+
+	"github.com/HiWay-Media/compress-go/compress"
 )
 
 func TestMain(m *testing.M) {
@@ -16,7 +18,6 @@ func TestMain(m *testing.M) {
 	m.Run()
 }
 
-
 func TestNewCompress(t *testing.T) {
 	//
 	c, err := GetCompress()
@@ -26,13 +27,12 @@ func TestNewCompress(t *testing.T) {
 	c.IsDebug()
 }
 
-
-func GetCompress() ( ICompress, error ) {
+func GetCompress() (compress.ICompress, error) {
 	//
-	apiKey 			:= os.Getenv("API_KEY")
-	customerName	:= os.Getenv("CUSTOMER_NAME")
+	apiKey := os.Getenv("API_KEY")
+	customerName := os.Getenv("CUSTOMER_NAME")
 	//
-	c, err := NewCompress(customerName, apiKey, false)
+	c, err := compress.NewCompress(customerName, apiKey, false)
 	if err != nil {
 		return nil, err
 	}
