@@ -12,12 +12,13 @@ import (
 * @param {number} amount
 * @returns restreamer list
 */
-func (o *compress) GetRestreamers(startFrom int, amount int) ([]Restreamer, error) {
-	requestBody := &findRestreamersRequest{
+func (o *compress) GetRestreamers() ([]Restreamer, error) {
+	requestBody := BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey}
+	/*&findRestreamersRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		StartFrom: startFrom,
 		Amount:    amount,
-	}
+	}*/
 	//
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
