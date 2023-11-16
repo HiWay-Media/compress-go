@@ -52,7 +52,7 @@ func (o *compress) GetUploads(uploadsPaginated UploadsPaginated) ([]VideoUploadI
  */
 
 func (o *compress) GetSingleUpload( jobid int ) (*VideoUploadInfo, error) {
-	requestBody := jobidProgressRequest{
+	requestBody := &jobidProgressRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		JobId:     jobid,
 	}
@@ -81,7 +81,7 @@ func (o *compress) GetSingleUpload( jobid int ) (*VideoUploadInfo, error) {
 * @returns progressStateResponse
  */
 func (o *compress) GetJobidProgress( jobid int ) (*VideoUploadInfo, error) {
-	requestBody := jobidProgressRequest{
+	requestBody := &jobidProgressRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		JobId:     jobid,
 	}
@@ -111,7 +111,15 @@ func (o *compress) GetJobidProgress( jobid int ) (*VideoUploadInfo, error) {
 * @param {string} api_key
 * @param {number} jobid
  */
-func (o *compress) SetPublishedUpload(requestBody publishedUploadRequest) (*VideoUploadInfo, error) {
+func (o *compress) SetPublishedUpload( jobid, published int  ) (*VideoUploadInfo, error) {
+	if published > 1 && published < 0{
+		return fmt.Errorf("published need to be 0 or 1")
+	}
+	requestBody := &publishedUploadRequest{
+		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		JobId:     jobid,
+		Published: published
+	}
 	//
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here

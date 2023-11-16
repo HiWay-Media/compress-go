@@ -12,7 +12,10 @@ import (
 * @returns list of categories of the customer
 */
 
-func (o *compress) GetCategories(requestBody categoriesRequest) ([]Category, error) {
+func (o *compress) GetCategories() ([]Category, error) {
+	requestBody := &categoriesRequest{
+		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+	}
 	//
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
