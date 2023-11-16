@@ -19,6 +19,7 @@ type ICompress interface {
 	GetCategories(requestBody categoriesRequest) ([]Category, error)
 	CreateCategory(requestBody createCategoryRequest) (*Category, error)
 	GetRestreamers(requestBody findRestreamersRequest) ([]Restreamer, error)
+	GetSingleRestreamer( instanceName string ) (*Restreamer, error)
 	//
 }
 
