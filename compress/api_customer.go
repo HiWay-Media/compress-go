@@ -5,7 +5,9 @@ import (
 	"fmt"
 )
 
+/*
 
+*/
 func (o *compress) GetCredentials() (*ResponseServer, error) {
 	//
 	resp, err := o.restyPost(CREDENTIALS, BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey})
@@ -19,6 +21,9 @@ func (o *compress) GetCredentials() (*ResponseServer, error) {
 	var obj ResponseServer
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
 		return nil, err
+	}
+	if obj.Data == "KO" {
+		return nil, fmt.Errorf("Error %s", obj.Message)
 	}
 	o.debugPrint(obj)
 	return &obj, nil
