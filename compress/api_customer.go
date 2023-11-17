@@ -24,9 +24,9 @@ func (o *compress) GetCredentials() (*Credential, error) {
 	}
 	o.debugPrint(obj)
 	//
-	var cred Credential
-	if err := json.Unmarshal(obj.Data, &cred); err != nil {
-		return nil, err
+	cred, err := obj.GetCredential()
+	if err != nil {
+		return nil, fmt.Errorf("Error casting credentials")
 	}
 	return &cred, nil
 }

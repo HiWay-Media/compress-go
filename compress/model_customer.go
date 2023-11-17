@@ -32,3 +32,12 @@ type Credential struct {
 	LumenS3AccessKey         string `json:"lumen_s3_access_key" `
 	LumenS3SecretKey         string `json:"lumen_s3_secret_key" `
 }
+
+
+func (r *ResponseServer) GetCredential() (*Credential, error) {
+    cred, ok := r.Data.(*Credential)
+    if !ok {
+        return nil, fmt.Errorf("unable to cast data to UserData")
+    }
+    return cred, nil
+}
