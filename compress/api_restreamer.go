@@ -74,8 +74,7 @@ func (o *compress) ScaleRestreamer(instanceName string, scale int) (*ResponseSer
 	requestBody := &scaleRestreamerRequest{
 		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		InstanceName: instanceName,
-		Scale: scale
-
+		Scale: scale,
 	}
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
