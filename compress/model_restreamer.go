@@ -88,5 +88,5 @@ type restreamerRequest struct {
 type scaleRestreamerRequest struct {
 	BaseModel
 	InstanceName string `json:"instance_name"  validate:"nonzero,min=1" required:"true"`
-	Scale int `json:"instance_name validate:"nonnil,min=0"  required:"true"" 
+	Scale        int    `json:"scale" required:"true"`
 }

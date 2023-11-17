@@ -28,5 +28,5 @@ func (o *compress) GetCredentials() (*Credential, error) {
 	if err != nil {
 		return nil, fmt.Errorf("Error casting credentials")
 	}
-	return &cred, nil
+	return cred, nil
 }
