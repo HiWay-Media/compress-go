@@ -65,3 +65,34 @@ func (o *compress) GetSingleRestreamer(instanceName string) (*Restreamer, error)
 	o.debugPrint(obj)
 	return &obj, nil
 }
+
+/*
+
+*/
+func (o *compress) ScaleRestreamer(instanceName string, scale int) (*ResponseServer, error){
+	// 
+	requestBody := &scaleRestreamerRequest{
+		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		InstanceName: instanceName,
+		Scale: scale
+
+	}
+	if errs := validator.Validate(requestBody); errs != nil {
+		// values not valid, deal with errors here
+		return nil, errs
+	}
+	resp, err := o.restyPost(GET_RUNNING_SINGLE_INSTANCE(), requestBody)
+	if err != nil {
+		return nil, err
+	}
+	var obj ResponseServer
+	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
+		return nil, err
+	}
+	if obj.Data == "KO" {
+		return nil, fmt.Errorf("Error %s", obj.Message)
+	}
+	o.debugPrint(obj)
+	return &obj, nil
+	//
+}
