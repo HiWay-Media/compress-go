@@ -1,6 +1,5 @@
 package compress
 
-import "fmt"
 /*
 */
 type Credential struct {
@@ -35,10 +34,8 @@ type Credential struct {
 }
 
 
-func (r *ResponseServer) GetCredential() (*Credential, error) {
-    cred, ok := r.Data.(*Credential)
-    if !ok {
-        return nil, fmt.Errorf("unable to cast data to UserData")
-    }
-    return cred, nil
+type ResponseServerCredential struct {
+	Message  string     `json:"message"`
+	Response string     `json:"response"`
+	Data     Credential `json:"data"`
 }
