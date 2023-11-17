@@ -1,11 +1,12 @@
 package compress
 
 const (
-	TNGRM_BASE_URL = "https://api.tngrm.io/api/v3.0"
-	CATEGORIES     = "/external/upload/categories"
-	RESTREAMERS    = "/external/restreamers"
-	UPLOADS        = "/external/upload"
-	CREDENTIALS    = "/external/credentials/"
+	TNGRM_BASE_URL 	= "https://api.tngrm.io/api/v3.0"
+	CATEGORIES     	= "/external/upload/categories"
+	RESTREAMERS    	= "/external/restreamers"
+	UPLOADS        	= "/external/upload"
+	CREDENTIALS    	= "/external/credentials/"
+	EVENTS 			= "/external/events"
 )
 
 var (
@@ -30,6 +31,9 @@ var (
 	}
 	SCALE_INSTANCE = func() string {
 		return TNGRM_BASE_URL + RESTREAMERS + "/scale_instance"
+	}
+	BULK_EVENTS_CREATE = func() string {
+		return TNGRM_BASE_URL + EVENTS + "/create_bulk"
 	}
 	GET_UPLOADS = func() string {
 		return TNGRM_BASE_URL + UPLOADS
