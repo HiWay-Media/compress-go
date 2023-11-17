@@ -3,8 +3,9 @@ package compress
 import (
 	"encoding/json"
 	"fmt"
-
+	"github.com/minio/minio-go"
 	"gopkg.in/validator.v2"
+	"io"
 )
 
 /**
@@ -20,7 +21,7 @@ import (
 * @param {string} tags
 * @param {string} location_place
 * @param {number} category_id
-*/
+ */
 func (o *compress) GetUploads(uploadsPaginated UploadsPaginated) ([]VideoUploadInfo, error) {
 	//
 	if errs := validator.Validate(uploadsPaginated); errs != nil {
@@ -221,4 +222,30 @@ func (o *compress) getMinioURL(bucketFolderDestination string, customer string) 
 	}
 
 	return responsePresignedUrl, nil
+}
+
+func (o *compress) UploadMultipart(reader io.Reader, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error) {
+	objectPath := targetFolder + "/" + filename
+	_, err := o.minioClient.PutObject(
+		o.bucket,
+		objectPath,
+		reader,
+		size,
+		minio.PutObjectOptions{},
+	)
+
+	if err != nil {
+		return nil, err
+	}
+
+	responseCreateUploadAndEncode, err := o.createUpload(o.apiKey, objectPath, size, categoryId, title, tags, location, o.customerName)
+	if err != nil {
+		return nil, err
+	}
+
+	if responseCreateUploadAndEncode.Response != "OK" {
+		return nil, fmt.Errorf("something went wrong during create upload and encode, err: %s %s", responseCreateUploadAndEncode.Message, responseCreateUploadAndEncode.Response)
+	}
+
+	return responseCreateUploadAndEncode, nil
 }
