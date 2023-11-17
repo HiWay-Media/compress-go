@@ -102,7 +102,7 @@ func (o *compress) ScaleRestreamer(instanceName string, scale int) (*ResponseSer
 func (o *compress) CreateEventsBulk(request []InstancesEventCreate) (*ResponseServer, error) {
 	requestBody := &bulkRestreamerRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
-		Instances: request
+		Instances: request,
 	}
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
