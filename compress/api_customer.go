@@ -24,5 +24,5 @@ func (o *compress) GetCredentials() (*Credential, error) {
 	}
 	o.debugPrint(obj)
 	//
-	return &obj.Credential, nil
+	return &obj.Data, nil
 }
