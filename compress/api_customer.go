@@ -19,7 +19,7 @@ func (o *compress) GetCredentials() (*Credential, error) {
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
 		return nil, err
 	}
-	if obj.Data == "KO" {
+	if obj.Response == "KO" {
 		return nil, fmt.Errorf("Error %s", obj.Message)
 	}
 	o.debugPrint(obj)
