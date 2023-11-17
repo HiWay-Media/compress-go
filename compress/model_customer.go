@@ -1,5 +1,6 @@
 package compress
 
+import "fmt"
 /*
 */
 type Credential struct {
