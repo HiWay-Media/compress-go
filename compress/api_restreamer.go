@@ -95,3 +95,30 @@ func (o *compress) ScaleRestreamer(instanceName string, scale int) (*ResponseSer
 	return &obj, nil
 	//
 }
+
+/*
+
+*/
+func (o *compress) CreateEventsBulk(request []InstancesEventCreate) (*ResponseServer, error) {
+	requestBody := &bulkRestreamerRequest{
+		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		Instances: request,
+	}
+	if errs := validator.Validate(requestBody); errs != nil {
+		// values not valid, deal with errors here
+		return nil, errs
+	}
+	resp, err := o.restyPost(BULK_EVENTS_CREATE(), requestBody)
+	if err != nil {
+		return nil, err
+	}
+	var obj ResponseServer
+	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
+		return nil, err
+	}
+	if obj.Data == "KO" {
+		return nil, fmt.Errorf("Error %s", obj.Message)
+	}
+	o.debugPrint(obj)
+	return &obj, nil
+}

@@ -24,6 +24,7 @@ type ICompress interface {
 	GetRestreamers() ([]Restreamer, error) // startFrom int, amount int
 	GetSingleRestreamer(instanceName string) (*Restreamer, error)
 	ScaleRestreamer(instanceName string, scale int) (*ResponseServer, error)
+	CreateEventsBulk(request []InstancesEventCreate) (*ResponseServer, error)
 	//
 }
 

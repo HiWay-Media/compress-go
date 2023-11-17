@@ -90,3 +90,19 @@ type scaleRestreamerRequest struct {
 	InstanceName string `json:"instance_name"  validate:"nonzero,min=1" required:"true"`
 	Scale        int    `json:"scale" required:"true"`
 }
+
+type InstancesEventCreate struct {
+	InstanceName 	string `json:"instance_name"  validate:"nonzero,min=1" required:"true"`
+	EventName 		string `json:"event_name"  validate:"nonzero,min=1" required:"true"`
+	Protocol 		string `json:"protocol"  validate:"nonzero,min=1" required:"true"`
+}
+
+/*type instancesEventCreateRequest struct {
+	InstancesEventCreate
+	Customer 
+}*/
+
+type bulkRestreamerRequest struct {
+	BaseModel
+	Instances []InstancesEventCreate
+}
