@@ -28,6 +28,9 @@ var (
 	GET_RUNNING_SINGLE_INSTANCE = func() string {
 		return TNGRM_BASE_URL + RESTREAMERS + "/single_instance"
 	}
+	SCALE_INSTANCE = func() string {
+		return TNGRM_BASE_URL + RESTREAMERS + "/scale_instance"
+	}
 	GET_UPLOADS = func() string {
 		return TNGRM_BASE_URL + UPLOADS
 	}
