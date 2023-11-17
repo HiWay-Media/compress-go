@@ -10,7 +10,7 @@ type ICompress interface {
 	//
 	HealthCheck() error
 	IsDebug() bool
-	GetCredentials() (*ResponseServer, error)
+	GetCredentials() (*Credential, error)
 	GetUploads(uploadsPaginated UploadsPaginated) ([]VideoUploadInfo, error) // need to change it with args
 	GetSingleUpload(jobid int) (*VideoUploadInfo, error)
 	GetJobidProgress(jobid int) (*VideoUploadInfo, error)
@@ -20,13 +20,15 @@ type ICompress interface {
 	CreateCategory(name string) (*Category, error)
 	GetRestreamers() ([]Restreamer, error) // startFrom int, amount int
 	GetSingleRestreamer(instanceName string) (*Restreamer, error)
+	//
 }
 
 type compress struct {
-	restClient   *resty.Client
-	debug        bool
-	customerName string
-	apiKey       string
+	restClient   	*resty.Client
+	debug        	bool
+	customerName 	string
+	apiKey       	string
+	customerId 		int
 }
 
 func NewCompress(customerName, apiKey string, isDebug bool) (ICompress, error) {
@@ -45,12 +47,12 @@ func NewCompress(customerName, apiKey string, isDebug bool) (ICompress, error) {
 	c.restClient.SetBaseURL(TNGRM_BASE_URL)
 	c.restClient.SetDebug(isDebug)
 	//
-	_, err := c.GetCredentials()
+	cred, err := c.GetCredentials()
 	if err != nil {
 		return nil, err
 	}
+	c.customerId = cred.CustomerID
 	//
 	return c, nil
 }
-
 //
