@@ -8,16 +8,13 @@ import (
 /*
 
 */
-func (o *compress) GetCredentials() (*ResponseServer, error) {
+func (o *compress) GetCredentials() (*Credential, error) {
 	//
 	resp, err := o.restyPost(CREDENTIALS, BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey})
 	if err != nil {
 		return nil, err
 	}
 	o.debugPrint(resp)
-	if resp.IsError() {
-		return nil, fmt.Errorf("")
-	}
 	var obj ResponseServer
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
 		return nil, err
@@ -26,5 +23,10 @@ func (o *compress) GetCredentials() (*ResponseServer, error) {
 		return nil, fmt.Errorf("Error %s", obj.Message)
 	}
 	o.debugPrint(obj)
-	return &obj, nil
+	//
+	var cred Credential
+	if err := json.Unmarshal(obj.Data, &cred); err != nil {
+		return nil, err
+	}
+	return &cred, nil
 }
