@@ -3,7 +3,7 @@ module github.com/HiWay-Media/compress-go
 go 1.18
 
 require (
-	github.com/go-resty/resty/v2 v2.10.0
+	github.com/go-resty/resty/v2 v2.11.0
 	github.com/minio/minio-go v6.0.14+incompatible
 	gopkg.in/validator.v2 v2.0.1
 )
