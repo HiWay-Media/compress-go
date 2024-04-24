@@ -1,7 +1,7 @@
 package compress
 
 const (
-	TNGRM_BASE_URL 	= "https://api.tngrm.io/api/v3.0"
+	TNGRM_BASE_URL 	= "https://api-compress.hiway.media/api/v4.0"
 	CATEGORIES     	= "/external/upload/categories"
 	RESTREAMERS    	= "/external/restreamers"
 	UPLOADS        	= "/external/upload"
