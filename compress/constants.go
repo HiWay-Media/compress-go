@@ -35,6 +35,24 @@ var (
 	BULK_EVENTS_CREATE = func() string {
 		return TNGRM_BASE_URL + EVENTS + "/create_bulk"
 	}
+	RESTREAMER_HLS_START = func() string { // instanceName string, streamProtocol string
+		return TNGRM_BASE_URL + RESTREAMERS + "/hls/start"
+	}
+	RESTREAMER_HLS_STOP = func() string { // instanceName string, streamProtocol string
+		return TNGRM_BASE_URL + RESTREAMERS + "/hls/stop"
+	}
+	RESTREAMER_PUSH_START = func() string { // instanceName string, streamProtocol string
+		return TNGRM_BASE_URL + RESTREAMERS + "/push/start"
+	}
+	RESTREAMER_PUSH_STOP = func() string { // instanceName string, streamProtocol string
+		return TNGRM_BASE_URL + RESTREAMERS + "/push/stop"
+	}
+	RESTREAMER_PULL_START = func() string { // instanceName string, streamProtocol string
+		return TNGRM_BASE_URL + RESTREAMERS + "/pull/start"
+	}
+	RESTREAMER_PULL_STOP = func() string { // instanceName string, streamProtocol string
+		return TNGRM_BASE_URL + RESTREAMERS + "/pull/stop"
+	}
 	GET_UPLOADS = func() string {
 		return TNGRM_BASE_URL + UPLOADS
 	}
