@@ -106,3 +106,53 @@ type bulkRestreamerRequest struct {
 	BaseModel
 	Instances []InstancesEventCreate
 }
+
+
+type HlsResponse struct {
+	Message string `json:"message" `
+	Result  string `json:"result" `
+}
+
+type hlsBodyRequest struct {
+	BaseModel
+	InstanceName   string `json:"instance_name" `
+	StreamProtocol string `json:"stream_protocol" `
+}
+
+
+type startPushRequest struct {
+	BaseModel
+	InstanceName    string `json:"instance_name" validate:"min=0" required:"true"`
+	ExternalServers []struct {
+		ExternalServer string `json:"external_server" `
+		IngestProtocol string `json:"ingest_protocol" `
+		AudioChannel   string `json:"audio_channel" `
+	} `json:"external_servers"`
+}
+
+
+type stopPushRequest struct {
+	BaseModel
+	InstanceName    string `json:"instance_name" `
+	ExternalServers []struct {
+		ProcessID string `json:"process_id" `
+	} `json:"external_servers"`
+}
+
+
+type startPullRequest struct {
+	BaseModel
+	InstanceName   string `json:"instance_name" `
+	ExternalServer string `json:"external_server" `
+	IngestProtocol string `json:"ingest_protocol" `
+	AudioChannel   string `json:"audio_channel" `
+	Type           string `json:"type" `
+	Encoding       string `json:"encoding" `
+}
+
+
+type stopPullRequest struct {
+	BaseModel
+	InstanceName string `json:"instance_name" `
+	ProcessID    string `json:"process_id" `
+}

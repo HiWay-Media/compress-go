@@ -122,3 +122,13 @@ func (o *compress) CreateEventsBulk(request []InstancesEventCreate) (*ResponseSe
 	o.debugPrint(obj)
 	return &obj, nil
 }
+
+func (o *compress) RestreamerHlsStart(request hlsBodyRequest) (*HlsResponse, error){
+	return nil, nil
+}
+
+
+
+func (o *compress)  RestreamerHlsStop(request hlsBodyRequest) (*HlsResponse, error){
+	return nil, nil
+}

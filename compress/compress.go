@@ -25,6 +25,8 @@ type ICompress interface {
 	GetSingleRestreamer(instanceName string) (*Restreamer, error)
 	ScaleRestreamer(instanceName string, scale int) (*ResponseServer, error)
 	CreateEventsBulk(request []InstancesEventCreate) (*ResponseServer, error)
+	RestreamerHlsStart(request hlsBodyRequest) (*HlsResponse, error)
+	RestreamerHlsStop(request hlsBodyRequest) (*HlsResponse, error)
 	//
 }
 
@@ -64,6 +66,7 @@ func NewCompress(customerName, apiKey string, isDebug bool) (ICompress, error) {
 	if err != nil {
 		return nil, err
 	}
+	// @p4xx07 need to refactor with multizone
 	c.minioClient, err = getMinioClient(
 		u.Host,
 		cred.S3AccessKey,
