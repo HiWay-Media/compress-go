@@ -6,8 +6,7 @@ import (
 )
 
 /*
-
-*/
+ */
 func (o *compress) GetCredentials() (*Credential, error) {
 	//
 	resp, err := o.restyPost(CREDENTIALS, BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey})
@@ -27,14 +26,13 @@ func (o *compress) GetCredentials() (*Credential, error) {
 	return &obj.Data, nil
 }
 
-
 /**
 * Need to call before upload s3
-* 
+*
 * @returns customer_s3
-*/
+ */
 func (o *compress) GetCustomerS3Zone() (*CustomerS3, error) {
-	resp, err := o.restyPost(GET_ZONE, BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey})
+	resp, err := o.restyPost(GET_ZONE(), BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey})
 	if err != nil {
 		return nil, err
 	}
@@ -43,10 +41,7 @@ func (o *compress) GetCustomerS3Zone() (*CustomerS3, error) {
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
 		return nil, err
 	}
-	if obj.Response == "KO" {
-		return nil, fmt.Errorf("Error %s", obj.Message)
-	}
 	o.debugPrint(obj)
 	//
-	return &obj.Data, nil
+	return &obj, nil
 }
