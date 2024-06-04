@@ -19,7 +19,7 @@ func (o *compress) GetCredentials() (*Credential, error) {
 		return nil, err
 	}
 	if obj.Response == "KO" {
-		return nil, fmt.Errorf("Error %s", obj.Message)
+		return nil, fmt.Errorf("error %s", obj.Message)
 	}
 	o.debugPrint(obj)
 	//

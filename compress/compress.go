@@ -2,10 +2,10 @@ package compress
 
 import (
 	"fmt"
+	"io"
+
 	"github.com/go-resty/resty/v2"
 	"github.com/minio/minio-go"
-	"io"
-	"net/url"
 )
 
 type ICompress interface {
@@ -57,7 +57,7 @@ func NewCompress(customerName, apiKey string, isDebug bool) (ICompress, error) {
 	c.restClient.SetBaseURL(TNGRM_BASE_URL)
 	c.restClient.SetDebug(isDebug)
 	//
-	cred, err := c.GetCredentials()
+	/*cred, err := c.GetCredentials()
 	if err != nil {
 		return nil, err
 	}
@@ -77,7 +77,7 @@ func NewCompress(customerName, apiKey string, isDebug bool) (ICompress, error) {
 	c.bucket = cred.S3Bucket
 	if err != nil {
 		return nil, err
-	}
+	}*/
 	return c, nil
 }
 
