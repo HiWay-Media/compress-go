@@ -39,3 +39,27 @@ type ResponseServerCredential struct {
 	Response string     `json:"response"`
 	Data     Credential `json:"data"`
 }
+
+
+type CustomerS3 struct {
+	ID                     int        `json:"id" `
+	CustomerID             int        `json:"customer_id" gorm:"column:customer_id"`
+	S3Name                 string     `json:"s3_name" `
+	Host                   string     `json:"host" `
+	Bucket                 string     `json:"bucket" `
+	AccessKey              string     `json:"access_key" `
+	SecretKey              string     `json:"secret_key" `
+	IsActive               int        `json:"is_active" `
+	UpdateEnabled          int        `json:"update_enabled" `
+	CreatedAt              *time.Time `json:"created_at" gorm:"type:timestamp;"`
+	UpdatedAt              *time.Time `json:"updated_at" gorm:"type:timestamp;"`
+	DeletedAt              *time.Time `json:"deleted_at" gorm:"type:timestamp;"`
+	LiveNFSMount           string     `json:"live_nfs_mount"`
+	VodNFSMount            string     `json:"vod_nfs_mount"`
+	VodCDNBaseURL          string     `json:"vod_cdn_base_url"`
+	LiveCDNBaseURL         string     `json:"live_cdn_base_url"`
+	LiveUnprotectedBaseURL string     `json:"live_unprotected_base_url"`
+	VodUnprotectedBaseURL  string     `json:"vod_unprotected_base_url"`
+	Zone                   string     `json:"zone"`
+	BucketUpload           string     `json:"bucket_upload"`
+}

@@ -27,6 +27,7 @@ type ICompress interface {
 	CreateEventsBulk(request []InstancesEventCreate) (*ResponseServer, error)
 	RestreamerHlsStart(request hlsBodyRequest) (*HlsResponse, error)
 	RestreamerHlsStop(request hlsBodyRequest) (*HlsResponse, error)
+	GetCustomerS3Zone() (*CustomerS3, error)
 	//
 }
 

@@ -7,6 +7,7 @@ const (
 	UPLOADS        	= "/external/upload"
 	CREDENTIALS    	= "/external/credentials/"
 	EVENTS 			= "/external/events"
+	CUSTOMERS 		= "/external/customers"
 )
 
 var (
@@ -67,6 +68,9 @@ var (
 	}
 	PRESIGNED_URL_S3 = func() string {
 		return TNGRM_BASE_URL + UPLOADS + "/presignedUrl"
+	}
+	GET_ZONE = func() string {
+		return TNGRM_BASE_URL + CUSTOMERS + "/s3"
 	}
 	//
 )
