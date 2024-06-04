@@ -1,5 +1,6 @@
 package compress
 
+import "time"
 /*
 */
 type Credential struct {
