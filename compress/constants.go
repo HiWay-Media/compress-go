@@ -36,7 +36,13 @@ var (
 	BULK_EVENTS_CREATE = func() string {
 		return TNGRM_BASE_URL + EVENTS + "/create_bulk"
 	}
-	RESTREAMER_HLS_START = func() string { // instanceName string, streamProtocol string
+	EVENTS_HISTORY = func() string {
+		return TNGRM_BASE_URL + EVENTS + "/history"
+	}
+	LIVE_TO_VOD = func() string {
+		return TNGRM_BASE_URL + EVENTS + "/generate_vod"
+	}
+ 	RESTREAMER_HLS_START = func() string { // instanceName string, streamProtocol string
 		return TNGRM_BASE_URL + RESTREAMERS + "/hls/start"
 	}
 	RESTREAMER_HLS_STOP = func() string { // instanceName string, streamProtocol string
