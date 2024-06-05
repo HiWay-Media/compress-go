@@ -156,3 +156,26 @@ type stopPullRequest struct {
 	InstanceName string `json:"instance_name" `
 	ProcessID    string `json:"process_id" `
 }
+
+// call restreamer api for generate vod from event
+type generateVodRequest struct {
+	BaseModel
+	Category         string  `json:"category" `
+	CustomerID       *int    `json:"customer_id" `
+	Description      string  `json:"description" `
+	EventID          string  `json:"event_id" `
+	Instance         string  `json:"instance" `
+	Location         string  `json:"location" `
+	SkipMin          string  `json:"skip_min" `
+	Tags             string  `json:"tags" `
+	Title            string  `json:"title" `
+	ThumbnailsNumber string  `json:"thumbnails_number" `
+	Protocol         string  `json:"protocol" `
+}
+
+
+type eventsHistoryRequest struct {
+	BaseModel
+	StartFrom int    `json:"start_from" `
+	Amount    int    `json:"amount" `
+}

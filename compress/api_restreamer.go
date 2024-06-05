@@ -132,3 +132,4 @@ func (o *compress) RestreamerHlsStart(request hlsBodyRequest) (*HlsResponse, err
 func (o *compress)  RestreamerHlsStop(request hlsBodyRequest) (*HlsResponse, error){
 	return nil, nil
 }
+
