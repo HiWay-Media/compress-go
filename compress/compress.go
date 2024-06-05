@@ -28,6 +28,7 @@ type ICompress interface {
 	RestreamerHlsStart(request hlsBodyRequest) (*HlsResponse, error)
 	RestreamerHlsStop(request hlsBodyRequest) (*HlsResponse, error)
 	GetCustomerS3Zone() (*CustomerS3, error)
+	GenerateVodProxy(request generateVodRequest) (*generateVodResponse,  error)
 	//
 }
 

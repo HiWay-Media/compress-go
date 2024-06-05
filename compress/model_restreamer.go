@@ -179,3 +179,25 @@ type eventsHistoryRequest struct {
 	StartFrom int    `json:"start_from" `
 	Amount    int    `json:"amount" `
 }
+
+type RestreamerEvent struct {
+	Id           int        `json:"id" `
+	EventId      string     `json:"event_id" `
+	StartAt      time.Time  `json:"start_at" gorm:"type:timestamp;"`
+	UpdatedAt    time.Time  `json:"updated_at" gorm:"type:timestamp;"`
+	Active       int        `json:"active" `
+	Completed    int        `json:"completed" `
+	InstanceName string     `json:"instance_name" `
+	CustomerId   int        `json:"customer_id" `
+	EventName    string     `json:"event_name" `
+	EndAt        *time.Time `json:"end_at" gorm:"type:timestamp;"`
+	Protocol     string     `json:"protocol" `
+	IsLive       int        `json:"is_live" `
+	Deleted      int        `json:"deleted" `
+}
+
+type generateVodResponse struct {
+	JobId  string  `json:"jobid" `
+	Result string  `json:"result" `
+	Status *string `json:"status" `
+}
