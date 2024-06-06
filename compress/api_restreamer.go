@@ -151,7 +151,7 @@ func (o *compress) RestreamerHlsStart(instanceName string, streamProtocol string
 
 
 
-func (o *compress)  RestreamerHlsStop(request hlsBodyRequest) (*HlsResponse, error){
+func (o *compress)  RestreamerHlsStop(instanceName string, streamProtocol string) (*HlsResponse, error){
 	requestBody := &hlsBodyRequest{
 		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		InstanceName: instanceName,

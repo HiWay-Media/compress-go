@@ -26,7 +26,7 @@ type ICompress interface {
 	ScaleRestreamer(instanceName string, scale int) (*ResponseServer, error)
 	CreateEventsBulk(request []InstancesEventCreate) (*ResponseServer, error)
 	RestreamerHlsStart(instanceName string, streamProtocol string) (*HlsResponse, error)
-	RestreamerHlsStop(requinstanceName string, streamProtocol string) (*HlsResponse, error)
+	RestreamerHlsStop(instanceName string, streamProtocol string) (*HlsResponse, error)
 	RestreamerEventsHistory( startFrom int, amount int)  ([]RestreamerEvent, error)
 	GetCustomerS3Zone() (*CustomerS3, error)
 	GenerateVodProxy(request generateVodRequest) (*generateVodResponse,  error)
