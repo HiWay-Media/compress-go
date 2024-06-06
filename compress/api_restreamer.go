@@ -134,11 +134,6 @@ func (o *compress)  RestreamerHlsStop(request hlsBodyRequest) (*HlsResponse, err
 }
 
 
-func (o *compress)  GenerateVodProxy(request generateVodRequest) (*generateVodResponse, error){
-	return nil, nil
-}
-
-
 func (o *compress) RestreamerEventsHistory( startFrom int, amount int) ([]RestreamerEvent, error) {
 	return nil, nil
 }
