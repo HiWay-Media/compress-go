@@ -123,13 +123,57 @@ func (o *compress) CreateEventsBulk(request []InstancesEventCreate) (*ResponseSe
 	return &obj, nil
 }
 
-func (o *compress) RestreamerHlsStart(request hlsBodyRequest) (*HlsResponse, error){
+func (o *compress) RestreamerHlsStart(instanceName string, streamProtocol string) (*HlsResponse, error){
+	
+	requestBody := &hlsBodyRequest{
+		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		InstanceName: instanceName,
+		StreamProtocol: streamProtocol,
+	}
+	if errs := validator.Validate(requestBody); errs != nil {
+		// values not valid, deal with errors here
+		return nil, errs
+	}
+	resp, err := o.restyPost(RESTREAMER_HLS_START(), requestBody)
+	if err != nil {
+		return nil, err
+	}
+	o.debugPrint(resp)
+	if resp.IsError() {
+		return nil, fmt.Errorf("")
+	}
+	var obj HlsResponse
+	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
+		return nil, err
+	}
 	return nil, nil
 }
 
 
 
 func (o *compress)  RestreamerHlsStop(request hlsBodyRequest) (*HlsResponse, error){
+	requestBody := &hlsBodyRequest{
+		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		InstanceName: instanceName,
+		StreamProtocol: streamProtocol,
+	}
+	if errs := validator.Validate(requestBody); errs != nil {
+		// values not valid, deal with errors here
+		return nil, errs
+	}
+	resp, err := o.restyPost(RESTREAMER_HLS_STOP(), requestBody)
+	if err != nil {
+		return nil, err
+	}
+
+	o.debugPrint(resp)
+	if resp.IsError() {
+		return nil, fmt.Errorf("")
+	}
+	var obj HlsResponse
+	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
+		return nil, err
+	}
 	return nil, nil
 }
 
