@@ -3,6 +3,7 @@ package compress
 import (
 	"encoding/json"
 	"fmt"
+
 	"gopkg.in/validator.v2"
 )
 
@@ -11,7 +12,7 @@ import (
 * @param {number} start_from
 * @param {number} amount
 * @returns restreamer list
-*/
+ */
 func (o *compress) GetRestreamers() ([]Restreamer, error) {
 	requestBody := BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey}
 	/*&findRestreamersRequest{
@@ -67,14 +68,13 @@ func (o *compress) GetSingleRestreamer(instanceName string) (*Restreamer, error)
 }
 
 /*
-
-*/
-func (o *compress) ScaleRestreamer(instanceName string, scale int) (*ResponseServer, error){
-	// 
+ */
+func (o *compress) ScaleRestreamer(instanceName string, scale int) (*ResponseServer, error) {
+	//
 	requestBody := &scaleRestreamerRequest{
 		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		InstanceName: instanceName,
-		Scale: scale,
+		Scale:        scale,
 	}
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
@@ -97,8 +97,7 @@ func (o *compress) ScaleRestreamer(instanceName string, scale int) (*ResponseSer
 }
 
 /*
-
-*/
+ */
 func (o *compress) CreateEventsBulk(request []InstancesEventCreate) (*ResponseServer, error) {
 	requestBody := &bulkRestreamerRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
@@ -123,11 +122,11 @@ func (o *compress) CreateEventsBulk(request []InstancesEventCreate) (*ResponseSe
 	return &obj, nil
 }
 
-func (o *compress) RestreamerHlsStart(instanceName string, streamProtocol string) (*HlsResponse, error){
-	
+func (o *compress) RestreamerHlsStart(instanceName string, streamProtocol string) (*HlsResponse, error) {
+
 	requestBody := &hlsBodyRequest{
-		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
-		InstanceName: instanceName,
+		BaseModel:      BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		InstanceName:   instanceName,
 		StreamProtocol: streamProtocol,
 	}
 	if errs := validator.Validate(requestBody); errs != nil {
@@ -149,12 +148,10 @@ func (o *compress) RestreamerHlsStart(instanceName string, streamProtocol string
 	return &obj, nil
 }
 
-
-
-func (o *compress)  RestreamerHlsStop(instanceName string, streamProtocol string) (*HlsResponse, error){
+func (o *compress) RestreamerHlsStop(instanceName string, streamProtocol string) (*HlsResponse, error) {
 	requestBody := &hlsBodyRequest{
-		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
-		InstanceName: instanceName,
+		BaseModel:      BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		InstanceName:   instanceName,
 		StreamProtocol: streamProtocol,
 	}
 	if errs := validator.Validate(requestBody); errs != nil {
@@ -177,12 +174,11 @@ func (o *compress)  RestreamerHlsStop(instanceName string, streamProtocol string
 	return &obj, nil
 }
 
-
-func (o *compress) RestreamerEventsHistory( startFrom int, amount int) ([]RestreamerEvent, error) {
+func (o *compress) RestreamerEventsHistory(startFrom int, amount int) ([]RestreamerEvent, error) {
 	requestBody := &eventsHistoryRequest{
-		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		StartFrom: startFrom,
-		amount: amount,
+		Amount:    amount,
 	}
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
@@ -203,15 +199,14 @@ func (o *compress) RestreamerEventsHistory( startFrom int, amount int) ([]Restre
 	return obj, nil
 }
 
-
-func (o *compress) 	GenerateVodProxy(eventId string, instanceName string, title string,  ) (*generateVodResponse,  error) {
+func (o *compress) GenerateVodProxy(eventId string, instanceName string, title string) (*generateVodResponse, error) {
 	requestBody := &generateVodRequest{
-		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
-		ThumbnailsNumber:"0",
-		EventID: eventId,
-		CustomerID: &o.customerId,
-		Title: title, 
-		Instance: instanceName,
+		BaseModel:        BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		ThumbnailsNumber: "0",
+		EventID:          eventId,
+		CustomerID:       &o.customerId,
+		Title:            title,
+		Instance:         instanceName,
 	}
 	if errs := validator.Validate(requestBody); errs != nil {
 		// values not valid, deal with errors here
