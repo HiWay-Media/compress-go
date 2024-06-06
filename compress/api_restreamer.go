@@ -142,3 +142,8 @@ func (o *compress)  GenerateVodProxy(request generateVodRequest) (*generateVodRe
 func (o *compress) RestreamerEventsHistory( startFrom int, amount int) ([]RestreamerEvent, error) {
 	return nil, nil
 }
+
+
+func (o *compress) 	GenerateVodProxy(request generateVodRequest) (*generateVodResponse,  error) {
+	return nil, nil
+}

@@ -249,3 +249,7 @@ func (o *compress) UploadMultipart(reader io.Reader, size int64, categoryId int,
 
 	return responseCreateUploadAndEncode, nil
 }
+
+func (o *compress) GetCustomerS3Zone() (*CustomerS3, error){
+	return nil, nil
+}
