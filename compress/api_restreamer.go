@@ -146,7 +146,7 @@ func (o *compress) RestreamerHlsStart(instanceName string, streamProtocol string
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
 		return nil, err
 	}
-	return nil, nil
+	return &obj, nil
 }
 
 
@@ -174,15 +174,60 @@ func (o *compress)  RestreamerHlsStop(instanceName string, streamProtocol string
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
 		return nil, err
 	}
-	return nil, nil
+	return &obj, nil
 }
 
 
 func (o *compress) RestreamerEventsHistory( startFrom int, amount int) ([]RestreamerEvent, error) {
-	return nil, nil
+	requestBody := &eventsHistoryRequest{
+		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		StartFrom: startFrom,
+		amount: amount,
+	}
+	if errs := validator.Validate(requestBody); errs != nil {
+		// values not valid, deal with errors here
+		return nil, errs
+	}
+	resp, err := o.restyPost(EVENTS_HISTORY(), requestBody)
+	if err != nil {
+		return nil, err
+	}
+	o.debugPrint(resp)
+	if resp.IsError() {
+		return nil, fmt.Errorf("")
+	}
+	var obj []RestreamerEvent
+	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
+		return nil, err
+	}
+	return &obj, nil
 }
 
 
-func (o *compress) 	GenerateVodProxy(request generateVodRequest) (*generateVodResponse,  error) {
-	return nil, nil
+func (o *compress) 	GenerateVodProxy(eventId string, instanceName string, title string,  ) (*generateVodResponse,  error) {
+	requestBody := &generateVodRequest{
+		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
+		ThumbnailsNumber:"0",
+		EventID: eventId,
+		CustomerID: o.customerId,
+		Title: title, 
+		Instance: instanceName,
+	}
+	if errs := validator.Validate(requestBody); errs != nil {
+		// values not valid, deal with errors here
+		return nil, errs
+	}
+	resp, err := o.restyPost(LIVE_TO_VOD(), requestBody)
+	if err != nil {
+		return nil, err
+	}
+	o.debugPrint(resp)
+	if resp.IsError() {
+		return nil, fmt.Errorf("")
+	}
+	var obj generateVodResponse
+	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
+		return nil, err
+	}
+	return &obj, nil
 }

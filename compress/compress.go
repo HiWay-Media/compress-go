@@ -29,7 +29,7 @@ type ICompress interface {
 	RestreamerHlsStop(instanceName string, streamProtocol string) (*HlsResponse, error)
 	RestreamerEventsHistory( startFrom int, amount int)  ([]RestreamerEvent, error)
 	GetCustomerS3Zone() (*CustomerS3, error)
-	GenerateVodProxy(request generateVodRequest) (*generateVodResponse,  error)
+	GenerateVodProxy(eventId string, instanceName string, title string) (*generateVodResponse,  error)
 	//
 }
 
