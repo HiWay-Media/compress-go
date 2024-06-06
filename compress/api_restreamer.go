@@ -200,7 +200,7 @@ func (o *compress) RestreamerEventsHistory( startFrom int, amount int) ([]Restre
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
 		return nil, err
 	}
-	return &obj, nil
+	return obj, nil
 }
 
 
@@ -209,7 +209,7 @@ func (o *compress) 	GenerateVodProxy(eventId string, instanceName string, title 
 		BaseModel:    BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
 		ThumbnailsNumber:"0",
 		EventID: eventId,
-		CustomerID: o.customerId,
+		CustomerID: &o.customerId,
 		Title: title, 
 		Instance: instanceName,
 	}
