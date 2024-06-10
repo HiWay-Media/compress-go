@@ -1,6 +1,11 @@
 package test
 
 
+import (
+	"log"
+	"testing"
+)
+
 func TestGetCustomerS3(t *testing.T) {
 	//
 	c, err := GetCompress()
