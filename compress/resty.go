@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"log"
 	"encoding/json"
+	"strings"
 	"github.com/go-resty/resty/v2"
 )
 
