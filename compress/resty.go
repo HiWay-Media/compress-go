@@ -61,7 +61,7 @@ func (o *compress) debugPrint(data interface{}) {
 		log.Println(data)
 	}
 }
-/*
+
 func castPax[T any](body []byte) (*T, error) {
 	var obj T
 	if err := json.Unmarshal(body, &obj); err != nil {
@@ -69,4 +69,3 @@ func castPax[T any](body []byte) (*T, error) {
 	}
 	return &obj, nil
 }
-*/
