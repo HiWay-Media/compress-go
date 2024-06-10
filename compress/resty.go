@@ -23,6 +23,9 @@ func (o *compress) IsDebug() bool {
 }
 
 func(o *compress) GetCliendId() string {
+	if strings.Contains(o.customerName, "_client") {
+		return o.customerName
+	}
 	return o.customerName+"_client"
 }
 
