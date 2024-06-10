@@ -59,13 +59,13 @@ func NewCompress(customerName, apiKey string, isDebug bool) (ICompress, error) {
 	c.restClient.SetBaseURL(TNGRM_BASE_URL)
 	c.restClient.SetDebug(isDebug)
 	//
-	/*cred, err := c.GetCredentials()
+	cred, err := c.GetCredentials()
 	if err != nil {
 		return nil, err
 	}
 	c.customerId = cred.CustomerID
 
-	u, err := url.Parse(cred.S3Host)
+	/*u, err := url.Parse(cred.S3Host)
 	if err != nil {
 		return nil, err
 	}

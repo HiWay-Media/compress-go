@@ -36,7 +36,7 @@ func (o *compress) GetCustomerS3Zone() (*CustomerS3, error) {
 	if err != nil {
 		return nil, err
 	}
-	o.debugPrint(resp)
+	//o.debugPrint(resp)
 	var obj CustomerS3
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
 		return nil, err
