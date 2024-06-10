@@ -32,7 +32,12 @@ func (o *compress) GetCredentials() (*Credential, error) {
 * @returns customer_s3
  */
 func (o *compress) GetCustomerS3Zone() (*CustomerS3, error) {
-	resp, err := o.restyGet(GET_ZONE(), BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey})
+	//
+	queryParam := make(map[string]*string)
+	queryParam["client_id"] = o.GetCliendId()
+	queryParam["api_key"] = o.apiKey
+	//
+	resp, err := o.restyGet(GET_ZONE(), queryParam)
 	if err != nil {
 		return nil, err
 	}
