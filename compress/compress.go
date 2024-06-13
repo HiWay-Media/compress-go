@@ -21,7 +21,8 @@ type ICompress interface {
 	UploadMultipart(reader io.Reader, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error)
 	GetCategories() ([]Category, error)
 	CreateCategory(name string) (*Category, error)
-	GetRestreamers() ([]Restreamer, error) // startFrom int, amount int
+	GetRestreamers(startFrom int, amount int) ([]Restreamer, error) // startFrom int, amount int
+	GetRestreamersOttAll(startFrom int, amount int) ([]Restreamer, error) // startFrom int, amount int
 	GetSingleRestreamer(instanceName string) (*Restreamer, error)
 	ScaleRestreamer(instanceName string, scale int) (*ResponseServer, error)
 	CreateEventsBulk(request []InstancesEventCreate) (*ResponseServer, error)
