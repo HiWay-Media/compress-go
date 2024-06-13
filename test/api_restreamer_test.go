@@ -38,11 +38,11 @@ func TestGetRestreamersOttAll(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 	// need to be finish
-	restreamers, err := c.GetRestreamersOttAll(0, 100)
+	_, err := c.GetRestreamersOttAll(0, 100)
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
-	log.Println("restreamers ott ", restreamers)
+	//log.Println("restreamers ott ", restreamers)
 	//
 }
 
