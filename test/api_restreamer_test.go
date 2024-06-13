@@ -13,7 +13,7 @@ func TestGetRestreamers(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 	// need to be finish
-	restreamers, err := c.GetRestreamers()
+	restreamers, err := c.GetRestreamers(0, 10)
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
@@ -27,4 +27,21 @@ func TestGetRestreamers(t *testing.T) {
 	//
 }
 
+
+
+/*
+*/
+func TestGetRestreamersOttAll(t *testing.T) {
+	//
+	c, err := GetCompress()
+	if err != nil {
+		t.Fatalf(err.Error())
+	}
+	// need to be finish
+	restreamers, err := c.GetRestreamersOttAll(0, 100)
+	if err != nil {
+		t.Fatalf(err.Error())
+	}
+	//
+}
 
