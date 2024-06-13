@@ -33,7 +33,7 @@ func (o *compress) GetCredentials() (*Credential, error) {
  */
 func (o *compress) GetCustomerS3Zone() (*CustomerS3, error) {
 	//
-	resp, err := o.restyPost(GET_ZONE(),  BaseModel{ClientId: o.GetCliendId(),)
+	resp, err := o.restyPost(GET_ZONE(),  BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey} )
 	if err != nil {
 		return nil, err
 	}
