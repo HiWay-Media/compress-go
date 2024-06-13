@@ -38,7 +38,7 @@ func TestGetRestreamersOttAll(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 	// need to be finish
-	_, err := c.GetRestreamersOttAll(0, 100)
+	_, err = c.GetRestreamersOttAll(0, 100)
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
