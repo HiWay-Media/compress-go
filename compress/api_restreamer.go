@@ -60,7 +60,7 @@ func (o *compress) GetRestreamersOttAll(startFrom int, amount int) ([]Restreamer
 		// values not valid, deal with errors here
 		return nil, errs
 	}
-	resp, err := o.restyPost(GET_RESTREAMERS(), requestBody)
+	resp, err := o.restyPost(GET_RESTREAMERS_OTT_ALL(), requestBody)
 	if err != nil {
 		return nil, err
 	}

@@ -24,6 +24,9 @@ var (
 	GET_RESTREAMERS = func() string {
 		return TNGRM_BASE_URL + RESTREAMERS
 	}
+	GET_RESTREAMERS_OTT_ALL = func() string {
+		return TNGRM_BASE_URL + RESTREAMERS + "/ott_all"
+	}
 	GET_RUNNING_INSTANCES = func() string {
 		return TNGRM_BASE_URL + RESTREAMERS + "/running_instances"
 	}
