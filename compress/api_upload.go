@@ -207,7 +207,9 @@ func (o *compress) getMinioURL(bucketFolderDestination string, customer string) 
 	response, err := o.restClient.R().
 		SetHeader("Content-Type", "application/json").
 		SetBody(&minioUploadPresignedByApikeyRequest{
-			Customer: customer,
+			//Customer: customer,
+			ApiKey: o.apiKey,
+			ClientId: o.clientId,
 			FileName: bucketFolderDestination,
 		}).
 		SetResult(&responseMinioPresigned{}).

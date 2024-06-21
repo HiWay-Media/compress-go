@@ -40,21 +40,24 @@ type compress struct {
 	bucket       string
 	debug        bool
 	customerName string
+	clientId 	 string
 	apiKey       string
 	customerId   int
 }
 
-func NewCompress(customerName, apiKey string, isDebug bool) (ICompress, error) {
-	if customerName == "" {
-		return nil, fmt.Errorf("customerName is compulsory")
+func NewCompress(clientId, apiKey string, isDebug bool) (ICompress, error) {
+	if clientId == "" {
+		return nil, fmt.Errorf("clientId is compulsory")
 	}
 	if apiKey == "" {
 		return nil, fmt.Errorf("apiKey is compulsory")
 	}
+	customerName := string.Replace(clientId, "_client", "")
 	c := &compress{
 		debug:        isDebug,
 		restClient:   resty.New(),
 		customerName: customerName,
+		clientId: 	  clientId,
 		apiKey:       apiKey,
 	}
 	c.restClient.SetBaseURL(TNGRM_BASE_URL)

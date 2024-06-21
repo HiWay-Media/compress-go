@@ -84,7 +84,9 @@ type createUploadByApikeyRequest struct {
 }
 
 type minioUploadPresignedByApikeyRequest struct {
-	Customer string `json:"customer"`
+	//Customer string `json:"customer"`
+	ApiKey string `json:"api_key"`
+	ClientId string `json:"client_id"`
 	FileName string `json:"filename"`
 }
 
