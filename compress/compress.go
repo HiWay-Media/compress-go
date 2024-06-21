@@ -52,7 +52,7 @@ func NewCompress(clientId, apiKey string, isDebug bool) (ICompress, error) {
 	if apiKey == "" {
 		return nil, fmt.Errorf("apiKey is compulsory")
 	}
-	customerName := string.Replace(clientId, "_client", "")
+	customerName := string.ReplaceAll(clientId, "_client", "")
 	c := &compress{
 		debug:        isDebug,
 		restClient:   resty.New(),
