@@ -22,16 +22,16 @@ type ICompress interface {
 	UploadMultipart(reader io.Reader, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error)
 	GetCategories() ([]Category, error)
 	CreateCategory(name string) (*Category, error)
-	GetRestreamers(startFrom int, amount int) ([]Restreamer, error) // startFrom int, amount int
-	GetRestreamersOttAll(startFrom int, amount int) ([]Restreamer, error) // startFrom int, amount int
+	GetRestreamers(startFrom int, amount int) ([]Restreamer, error)                  // startFrom int, amount int
+	GetRestreamersOttAll(startFrom int, amount int) (*RestreamersOTTResponse, error) // startFrom int, amount int
 	GetSingleRestreamer(instanceName string) (*Restreamer, error)
 	ScaleRestreamer(instanceName string, scale int) (*ResponseServer, error)
 	CreateEventsBulk(request []InstancesEventCreate) (*ResponseServer, error)
 	RestreamerHlsStart(instanceName string, streamProtocol string) (*HlsResponse, error)
 	RestreamerHlsStop(instanceName string, streamProtocol string) (*HlsResponse, error)
-	RestreamerEventsHistory( startFrom int, amount int)  ([]RestreamerEvent, error)
+	RestreamerEventsHistory(startFrom int, amount int) ([]RestreamerEvent, error)
 	GetCustomerS3Zone() (*CustomerS3, error)
-	GenerateVodProxy(eventId string, instanceName string, title string) (*generateVodResponse,  error)
+	GenerateVodProxy(eventId string, instanceName string, title string) (*generateVodResponse, error)
 	//
 }
 
@@ -41,7 +41,7 @@ type compress struct {
 	bucket       string
 	debug        bool
 	customerName string
-	clientId 	 string
+	clientId     string
 	apiKey       string
 	customerId   int
 }
@@ -58,7 +58,7 @@ func NewCompress(clientId, apiKey string, isDebug bool) (ICompress, error) {
 		debug:        isDebug,
 		restClient:   resty.New(),
 		customerName: customerName,
-		clientId: 	  clientId,
+		clientId:     clientId,
 		apiKey:       apiKey,
 	}
 	c.restClient.SetBaseURL(TNGRM_BASE_URL)

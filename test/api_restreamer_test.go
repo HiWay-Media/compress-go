@@ -5,7 +5,7 @@ import (
 )
 
 /*
-*/
+ */
 func TestGetRestreamers(t *testing.T) {
 	//
 	c, err := GetCompress()
@@ -27,10 +27,8 @@ func TestGetRestreamers(t *testing.T) {
 	//
 }
 
-
-
 /*
-*/
+ */
 func TestGetRestreamersOttAll(t *testing.T) {
 	//
 	c, err := GetCompress()
@@ -45,4 +43,3 @@ func TestGetRestreamersOttAll(t *testing.T) {
 	//log.Println("restreamers ott ", restreamers)
 	//
 }
-

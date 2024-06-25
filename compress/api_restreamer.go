@@ -3,7 +3,7 @@ package compress
 import (
 	"encoding/json"
 	"fmt"
-	
+
 	"gopkg.in/validator.v2"
 )
 
@@ -41,14 +41,13 @@ func (o *compress) GetRestreamers(startFrom int, amount int) ([]Restreamer, erro
 	return obj, nil
 }
 
-
 /**
 *
 * @param {number} start_from
 * @param {number} amount
 * @returns restreamer list
  */
-func (o *compress) GetRestreamersOttAll(startFrom int, amount int) ([]Restreamer, error) {
+func (o *compress) GetRestreamersOttAll(startFrom int, amount int) (*RestreamersOTTResponse, error) {
 	//requestBody := BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey}
 	requestBody := &findRestreamersRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
@@ -68,12 +67,12 @@ func (o *compress) GetRestreamersOttAll(startFrom int, amount int) ([]Restreamer
 	if resp.IsError() {
 		return nil, fmt.Errorf("restreamers error")
 	}
-	var obj []Restreamer
+	var obj RestreamersOTTResponse
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
 		return nil, err
 	}
 	o.debugPrint(obj)
-	return obj, nil
+	return &obj, nil
 }
 
 /**
