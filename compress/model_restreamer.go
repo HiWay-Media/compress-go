@@ -76,8 +76,8 @@ type RestreamerSrt struct {
 
 type findRestreamersRequest struct {
 	BaseModel
-	StartFrom int    `json:"start_from" validate:"nonil" required:"true"`
-	Amount    int    `json:"amount"  validate:"nonnil" required:"true"`
+	StartFrom int     `json:"start_from" validate:"min=0,nonnil" required:"true"`
+	Amount    int    `json:"amount" validate:"min=0,nonnil" required:"true"`
 }
 
 type restreamerRequest struct {
