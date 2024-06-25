@@ -3,6 +3,7 @@ package compress
 import (
 	"fmt"
 	"io"
+	"strings"
 
 	"github.com/go-resty/resty/v2"
 	"github.com/minio/minio-go"
@@ -52,7 +53,7 @@ func NewCompress(clientId, apiKey string, isDebug bool) (ICompress, error) {
 	if apiKey == "" {
 		return nil, fmt.Errorf("apiKey is compulsory")
 	}
-	customerName := string.ReplaceAll(clientId, "_client", "")
+	customerName := strings.ReplaceAll(clientId, "_client", "")
 	c := &compress{
 		debug:        isDebug,
 		restClient:   resty.New(),
