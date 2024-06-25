@@ -47,7 +47,7 @@ func (o *compress) GetRestreamers(startFrom int, amount int) ([]Restreamer, erro
 * @param {number} amount
 * @returns restreamer list
  */
-func (o *compress) GetRestreamersOttAll(startFrom int, amount int) ([]RestreamersOTTResponse, error) {
+func (o *compress) GetRestreamersOttAll(startFrom int, amount int) (RestreamersOTTResponse, error) {
 	//requestBody := BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey}
 	requestBody := &findRestreamersRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
@@ -67,7 +67,7 @@ func (o *compress) GetRestreamersOttAll(startFrom int, amount int) ([]Restreamer
 	if resp.IsError() {
 		return nil, fmt.Errorf("restreamers error")
 	}
-	var obj []RestreamersOTTResponse
+	var obj RestreamersOTTResponse
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
 		return nil, err
 	}

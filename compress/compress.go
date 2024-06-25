@@ -23,7 +23,7 @@ type ICompress interface {
 	GetCategories() ([]Category, error)
 	CreateCategory(name string) (*Category, error)
 	GetRestreamers(startFrom int, amount int) ([]Restreamer, error) // startFrom int, amount int
-	GetRestreamersOttAll(startFrom int, amount int) ([]RestreamersOTTResponse, error) // startFrom int, amount int
+	GetRestreamersOttAll(startFrom int, amount int) (RestreamersOTTResponse, error) // startFrom int, amount int
 	GetSingleRestreamer(instanceName string) (*Restreamer, error)
 	ScaleRestreamer(instanceName string, scale int) (*ResponseServer, error)
 	CreateEventsBulk(request []InstancesEventCreate) (*ResponseServer, error)
