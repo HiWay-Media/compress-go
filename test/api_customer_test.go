@@ -17,6 +17,6 @@ func TestGetCustomerS3(t *testing.T) {
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
-	log.Println("zone ", zone)
+	//log.Println("zone ", zone)
 	//c.IsDebug()
 }
