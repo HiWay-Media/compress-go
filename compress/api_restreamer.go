@@ -47,7 +47,7 @@ func (o *compress) GetRestreamers(startFrom int, amount int) ([]Restreamer, erro
 * @param {number} amount
 * @returns restreamer list
  */
-func (o *compress) GetRestreamersOttAll(startFrom int, amount int) (RestreamersOTTResponse, error) {
+func (o *compress) GetRestreamersOttAll(startFrom int, amount int) (*RestreamersOTTResponse, error) {
 	//requestBody := BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey}
 	requestBody := &findRestreamersRequest{
 		BaseModel: BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey},
@@ -72,7 +72,7 @@ func (o *compress) GetRestreamersOttAll(startFrom int, amount int) (RestreamersO
 		return nil, err
 	}
 	o.debugPrint(obj)
-	return obj, nil
+	return &obj, nil
 }
 
 /**
