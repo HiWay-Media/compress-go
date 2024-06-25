@@ -148,6 +148,12 @@ type bulkRestreamerRequest struct {
 }
 
 type HlsResponse struct {
+	Message  string                `json:"message"`
+	Response string                `json:"response"`
+	Data     restreamerHLSResponse `json:"data"`
+}
+
+type restreamerHLSResponse struct {
 	Message string `json:"message" `
 	Result  string `json:"result" `
 }
