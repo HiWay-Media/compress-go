@@ -1,4 +1,4 @@
-package compress 
+package compress
 
 import "time"
 
@@ -38,49 +38,47 @@ type Restreamer struct {
 	RestreamerSrt        *RestreamerSrt      `json:"srt" gorm:"foreignKey:restreamer_id"`
 }
 
-
 type RestreamersOTTResponse struct {
 	Instances []RestreamerOTT `json:"instances"`
 }
 
 type RestreamerOTT struct {
-	ID                   int64            `json:"id"`
-	Enabled              int64            `json:"enabled"`
-	Name                 string           `json:"name"`
-	CustomerID           int64            `json:"customer_id"`
-	Dnsname              string           `json:"dnsname"`
-	MarathonURL          string           `json:"marathon_url"`
-	NpmURL               string           `json:"npm_url"`
-	ExternalRtmp         string           `json:"external_rtmp"`
-	LoopbackRtmp         LoopbackRtmp     `json:"loopback_rtmp"`
-	Md5Generator         interface{}      `json:"md5_generator"`
-	MarathonPath         MarathonPath     `json:"marathon_path"`
-	Token                string           `json:"token"`
-	DockerTemplate       string   `json:"docker_template"`
-	Status               int64            `json:"status"`
-	Owner                string            `json:"owner"`
-	Title                string           `json:"title"`
-	Description          string           `json:"description"`
-	OwnerID              int64            `json:"owner_id"`
-	CDNPath              string           `json:"cdn_path"`
-	ExtendedData         string           `json:"extended_data"`
-	LatestEvent          string           `json:"latest_event"`
-	Label                string           `json:"label"`
-	Dedicated            string    `json:"dedicated"`
-	StaticIP             string           `json:"static_ip"`
-	NvidiaVisibleDevices string           `json:"nvidia_visible_devices"`
-	Transcode            int64            `json:"transcode"`
-	UpdateAt             time.Time        `json:"update_at"`
-	PassiveToken         string `json:"passive_token"`
+	ID                   int64              `json:"id"`
+	Enabled              int64              `json:"enabled"`
+	Name                 string             `json:"name"`
+	CustomerID           int64              `json:"customer_id"`
+	Dnsname              string             `json:"dnsname"`
+	MarathonURL          string             `json:"marathon_url"`
+	NpmURL               string             `json:"npm_url"`
+	ExternalRtmp         string             `json:"external_rtmp"`
+	LoopbackRtmp         string             `json:"loopback_rtmp"`
+	Md5Generator         interface{}        `json:"md5_generator"`
+	MarathonPath         string             `json:"marathon_path"`
+	Token                string             `json:"token"`
+	DockerTemplate       string             `json:"docker_template"`
+	Status               int64              `json:"status"`
+	Owner                string             `json:"owner"`
+	Title                string             `json:"title"`
+	Description          string             `json:"description"`
+	OwnerID              int64              `json:"owner_id"`
+	CDNPath              string             `json:"cdn_path"`
+	ExtendedData         string             `json:"extended_data"`
+	LatestEvent          string             `json:"latest_event"`
+	Label                string             `json:"label"`
+	Dedicated            string             `json:"dedicated"`
+	StaticIP             string             `json:"static_ip"`
+	NvidiaVisibleDevices string             `json:"nvidia_visible_devices"`
+	Transcode            int64              `json:"transcode"`
+	UpdateAt             time.Time          `json:"update_at"`
+	PassiveToken         string             `json:"passive_token"`
 	Zone                 string             `json:"zone"`
-	Protocol             string     `json:"protocol"`
-	AwsURL               string           `json:"aws_url"`
-	DRMHLSURL            string           `json:"drm_hls_url"`
-	DRMDashURL           string           `json:"drm_dash_url"`
-	Settings             RestreamerSettings         `json:"settings"`
-	Srt                  *RestreamerSrt             `json:"srt"`
+	Protocol             string             `json:"protocol"`
+	AwsURL               string             `json:"aws_url"`
+	DRMHLSURL            string             `json:"drm_hls_url"`
+	DRMDashURL           string             `json:"drm_dash_url"`
+	Settings             RestreamerSettings `json:"settings"`
+	Srt                  *RestreamerSrt     `json:"srt"`
 }
-
 
 type RestreamerSettings struct {
 	Id              int    `json:"id" `
@@ -116,11 +114,10 @@ type RestreamerSrt struct {
 	PassiveToken    string  `json:"passive_token" `
 }
 
-
 type findRestreamersRequest struct {
 	BaseModel
-	StartFrom int     `json:"start_from" validate:"min=0,nonnil" required:"true"`
-	Amount    int    `json:"amount" validate:"min=0,nonnil" required:"true"`
+	StartFrom int `json:"start_from" validate:"min=0,nonnil" required:"true"`
+	Amount    int `json:"amount" validate:"min=0,nonnil" required:"true"`
 }
 
 type restreamerRequest struct {
@@ -135,21 +132,20 @@ type scaleRestreamerRequest struct {
 }
 
 type InstancesEventCreate struct {
-	InstanceName 	string `json:"instance_name"  validate:"nonzero,min=1" required:"true"`
-	EventName 		string `json:"event_name"  validate:"nonzero,min=1" required:"true"`
-	Protocol 		string `json:"protocol"  validate:"nonzero,min=1" required:"true"`
+	InstanceName string `json:"instance_name"  validate:"nonzero,min=1" required:"true"`
+	EventName    string `json:"event_name"  validate:"nonzero,min=1" required:"true"`
+	Protocol     string `json:"protocol"  validate:"nonzero,min=1" required:"true"`
 }
 
 /*type instancesEventCreateRequest struct {
 	InstancesEventCreate
-	Customer 
+	Customer
 }*/
 
 type bulkRestreamerRequest struct {
 	BaseModel
 	Instances []InstancesEventCreate
 }
-
 
 type HlsResponse struct {
 	Message string `json:"message" `
@@ -162,7 +158,6 @@ type hlsBodyRequest struct {
 	StreamProtocol string `json:"stream_protocol" `
 }
 
-
 type startPushRequest struct {
 	BaseModel
 	InstanceName    string `json:"instance_name" validate:"min=0" required:"true"`
@@ -173,7 +168,6 @@ type startPushRequest struct {
 	} `json:"external_servers"`
 }
 
-
 type stopPushRequest struct {
 	BaseModel
 	InstanceName    string `json:"instance_name" `
@@ -181,7 +175,6 @@ type stopPushRequest struct {
 		ProcessID string `json:"process_id" `
 	} `json:"external_servers"`
 }
-
 
 type startPullRequest struct {
 	BaseModel
@@ -193,7 +186,6 @@ type startPullRequest struct {
 	Encoding       string `json:"encoding" `
 }
 
-
 type stopPullRequest struct {
 	BaseModel
 	InstanceName string `json:"instance_name" `
@@ -203,24 +195,23 @@ type stopPullRequest struct {
 // call restreamer api for generate vod from event
 type generateVodRequest struct {
 	BaseModel
-	Category         string  `json:"category" `
-	CustomerID       *int    `json:"customer_id" `
-	Description      string  `json:"description" `
-	EventID          string  `json:"event_id" `
-	Instance         string  `json:"instance" `
-	Location         string  `json:"location" `
-	SkipMin          string  `json:"skip_min" `
-	Tags             string  `json:"tags" `
-	Title            string  `json:"title" `
-	ThumbnailsNumber string  `json:"thumbnails_number" `
-	Protocol         string  `json:"protocol" `
+	Category         string `json:"category" `
+	CustomerID       *int   `json:"customer_id" `
+	Description      string `json:"description" `
+	EventID          string `json:"event_id" `
+	Instance         string `json:"instance" `
+	Location         string `json:"location" `
+	SkipMin          string `json:"skip_min" `
+	Tags             string `json:"tags" `
+	Title            string `json:"title" `
+	ThumbnailsNumber string `json:"thumbnails_number" `
+	Protocol         string `json:"protocol" `
 }
-
 
 type eventsHistoryRequest struct {
 	BaseModel
-	StartFrom int    `json:"start_from" `
-	Amount    int    `json:"amount" `
+	StartFrom int `json:"start_from" `
+	Amount    int `json:"amount" `
 }
 
 type RestreamerEvent struct {
