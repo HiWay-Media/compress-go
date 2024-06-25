@@ -39,6 +39,49 @@ type Restreamer struct {
 }
 
 
+type RestreamersOTTResponse struct {
+	Instances []RestreamerOTT `json:"instances"`
+}
+
+type RestreamerOTT struct {
+	ID                   int64            `json:"id"`
+	Enabled              int64            `json:"enabled"`
+	Name                 string           `json:"name"`
+	CustomerID           int64            `json:"customer_id"`
+	Dnsname              string           `json:"dnsname"`
+	MarathonURL          string           `json:"marathon_url"`
+	NpmURL               string           `json:"npm_url"`
+	ExternalRtmp         string           `json:"external_rtmp"`
+	LoopbackRtmp         LoopbackRtmp     `json:"loopback_rtmp"`
+	Md5Generator         interface{}      `json:"md5_generator"`
+	MarathonPath         MarathonPath     `json:"marathon_path"`
+	Token                string           `json:"token"`
+	DockerTemplate       string   `json:"docker_template"`
+	Status               int64            `json:"status"`
+	Owner                string            `json:"owner"`
+	Title                string           `json:"title"`
+	Description          string           `json:"description"`
+	OwnerID              int64            `json:"owner_id"`
+	CDNPath              string           `json:"cdn_path"`
+	ExtendedData         string           `json:"extended_data"`
+	LatestEvent          string           `json:"latest_event"`
+	Label                string           `json:"label"`
+	Dedicated            string    `json:"dedicated"`
+	StaticIP             string           `json:"static_ip"`
+	NvidiaVisibleDevices string           `json:"nvidia_visible_devices"`
+	Transcode            int64            `json:"transcode"`
+	UpdateAt             time.Time        `json:"update_at"`
+	PassiveToken         string `json:"passive_token"`
+	Zone                 string             `json:"zone"`
+	Protocol             string     `json:"protocol"`
+	AwsURL               string           `json:"aws_url"`
+	DRMHLSURL            string           `json:"drm_hls_url"`
+	DRMDashURL           string           `json:"drm_dash_url"`
+	Settings             RestreamerSettings         `json:"settings"`
+	Srt                  *RestreamerSrt             `json:"srt"`
+}
+
+
 type RestreamerSettings struct {
 	Id              int    `json:"id" `
 	EnableEncoding  int    `json:"enable_encoding" `
