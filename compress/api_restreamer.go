@@ -3,7 +3,7 @@ package compress
 import (
 	"encoding/json"
 	"fmt"
-	
+
 	"gopkg.in/validator.v2"
 )
 
@@ -40,7 +40,6 @@ func (o *compress) GetRestreamers(startFrom int, amount int) ([]Restreamer, erro
 	o.debugPrint(obj)
 	return obj, nil
 }
-
 
 /**
 *
