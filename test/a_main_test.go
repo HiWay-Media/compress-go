@@ -28,9 +28,9 @@ func TestNewCompress(t *testing.T) {
 
 func GetCompress() (compress.ICompress, error) {
 	apiKey := os.Getenv("API_KEY")
-	customerName := os.Getenv("CUSTOMER_NAME")
-
-	c, err := compress.NewCompress(customerName, apiKey, false)
+	clientId := os.GetEnv("CLIENT_ID")
+	//
+	c, err := compress.NewCompress(clientId, apiKey, false)
 	if err != nil {
 		return nil, err
 	}
