@@ -3,7 +3,6 @@ package test
 import (
 	"os"
 	"testing"
-	"log"
 	"github.com/HiWay-Media/compress-go/compress"
 )
 
@@ -21,7 +20,7 @@ func TestMain(m *testing.M) {
 func TestNewCompress(t *testing.T) {
 	c, err := GetCompress()
 	if err != nil {
-		log.Println("error getComrpess", err.Error())
+		//log.Println("error getComrpess", err.Error())
 		t.Fatalf(err.Error())
 	}
 	c.IsDebug()
