@@ -35,6 +35,7 @@ func(o *compress) GetCliendId() string {
 func (o *compress) restyPost(url string, body interface{}) (*resty.Response, error) {
 	resp, err := o.restClient.R().
 		SetHeader("Accept", "application/json").
+		SetHeader("Content-Type", "application/json").
 		SetBody(body).
 		Post(url)
 
