@@ -47,6 +47,8 @@ func TestUpload(t *testing.T) {
 	if response.Response != "OK" {
 		t.Fatalf(fmt.Sprintf("error %s", response.Message))
 	}
+
+	fmt.Println("response: ", response)
 }
 
 /*
