@@ -42,6 +42,10 @@ func (o *compress) GetCustomerS3Zone() (*ResponseCustomerS3, error) {
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
 		return nil, err
 	}
+
+	if obj.Response == "KO" {
+		return nil, fmt.Errorf("error %s", obj.Message)
+	}
 	o.debugPrint(obj)
 	//
 	return &obj, nil

@@ -163,6 +163,7 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 	zone := respCustomerS3.Data.Zone
 	bucketFolderDestination := respCustomerS3.Data.BucketUpload + "/" + targetFolder + "/" + filename
 	o.debugPrint("bucketFolderDestination " + respCustomerS3.Data.BucketUpload)
+	//
 	responsePresignedUrl, err := o.getMinioURL(bucketFolderDestination, o.customerName)
 	if err != nil {
 		return nil, err
