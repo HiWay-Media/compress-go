@@ -45,7 +45,7 @@ type compress struct {
 
 func NewCompress(customerName, apiKey string, isDebug bool) (ICompress, error) {
 	if customerName == "" {
-		return nil, fmt.Errorf("clientId is compulsory")
+		return nil, fmt.Errorf("customerName is compulsory")
 	}
 	if apiKey == "" {
 		return nil, fmt.Errorf("apiKey is compulsory")

@@ -15,13 +15,15 @@ func TestUpload(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 	//c.IsDebug()
-
 	filePath := "test.mp4"
+	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+		t.Fatalf("file does not exist: %s", filePath)
+	}
 	fileContent, err := os.ReadFile(filePath)
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
-
+	fmt.Print(fileContent)
 	stat, err := os.Stat(filePath)
 	if err != nil {
 		t.Fatalf(err.Error())
