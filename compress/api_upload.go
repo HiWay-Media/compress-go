@@ -162,7 +162,7 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 	}
 	zone := respCustomerS3.Data.Zone
 	o.debugPrint("zone ", zone)
-	fmt.Println("bucketUpload: ", respCustomerS3.Data.BucketUpload)
+	fmt.Println("bucketUpload: ", respCustomerS3.Data.BucketUpload, " zone ", zone)
 	bucketFolderDestination := NormalizeURL(respCustomerS3.Data.BucketUpload + filename)
 	//o.debugPrint("bucketFolderDestination " + respCustomerS3.Data.BucketUpload)
 	fmt.Println("bucketFolderDestination", bucketFolderDestination)
@@ -214,6 +214,7 @@ func (o *compress) createUpload(apikey string, bucketFolderDestination string, s
 			ReportedEmail: fmt.Sprintf("%s@tngrm.io", customer),
 			//ReportedEmail: "",
 			Apikey: apikey,
+			Zone:   zone,
 		}).
 		SetResult(&ru).
 		Post(CREATE_UPLOAD())

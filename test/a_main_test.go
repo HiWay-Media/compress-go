@@ -32,7 +32,7 @@ func GetCompress() (compress.ICompress, error) {
 	//clientId := os.Getenv("CLIENT_ID")
 	customerName := os.Getenv("CUSTOMER_NAME")
 	//
-	c, err := compress.NewCompress(customerName, apiKey, true)
+	c, err := compress.NewCompress(customerName, apiKey, false)
 	if err != nil {
 		return nil, err
 	}

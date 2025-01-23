@@ -81,11 +81,12 @@ type createUploadByApikeyRequest struct {
 	Tags          string `json:"tags"`
 	Location      string `json:"location"`
 	ReportedEmail string `json:"reporter_email"`
+	Zone          string `json:"zone"`
 }
 
 type minioUploadPresignedByApikeyRequest struct {
 	//Customer string `json:"customer"`
-	ApiKey string `json:"api_key"`
+	ApiKey   string `json:"api_key"`
 	ClientId string `json:"client_id"`
 	FileName string `json:"filename"`
 }
