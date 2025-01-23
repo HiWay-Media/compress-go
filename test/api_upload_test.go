@@ -7,21 +7,23 @@ import (
 )
 
 func TestUpload(t *testing.T) {
-	if os.Getenv("APP_ENV") == "runner" {
+	/*if os.Getenv("APP_ENV") == "runner" {
 		return
-	}
+	}*/
 	c, err := GetCompress()
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
-	c.IsDebug()
-
+	//c.IsDebug()
 	filePath := "test.mp4"
+	if _, err := os.Stat(filePath); os.IsNotExist(err) {
+		t.Fatalf("file does not exist: %s", filePath)
+	}
 	fileContent, err := os.ReadFile(filePath)
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
-
+	//fmt.Print(fileContent)
 	stat, err := os.Stat(filePath)
 	if err != nil {
 		t.Fatalf(err.Error())
@@ -29,20 +31,24 @@ func TestUpload(t *testing.T) {
 
 	response, err := c.Upload(
 		fileContent,
+		stat.Name(),
 		stat.Size(),
 		60678,
 		"title",
 		"tag",
 		"",
-		"title.mp4",
-		"/VMFS1/FILES/upload/test",
 	)
-
-	fmt.Print(response)
+	//fmt.Print(response)
 
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
+
+	if response.Response != "OK" {
+		t.Fatalf(fmt.Sprintf("error %s", response.Message))
+	}
+
+	fmt.Println("response: ", response)
 }
 
 /*

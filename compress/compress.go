@@ -2,7 +2,6 @@ package compress
 
 import (
 	"fmt"
-	"strings"
 
 	"github.com/go-resty/resty/v2"
 	"github.com/minio/minio-go"
@@ -17,7 +16,7 @@ type ICompress interface {
 	GetSingleUpload(jobid int) (*VideoUploadInfo, error)
 	GetJobidProgress(jobid int) (*VideoUploadInfo, error)
 	SetPublishedUpload(jobid int, published int) (*VideoUploadInfo, error)
-	Upload(file []byte, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error)
+	Upload(file []byte, filename string, size int64, categoryId int, title string, tags string, location string) (*ResponseUpload, error)
 	//UploadMultipart(reader io.Reader, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error) // need to add this feature
 	GetCategories() ([]Category, error)
 	CreateCategory(name string) (*Category, error)
@@ -44,14 +43,15 @@ type compress struct {
 	customerId   int
 }
 
-func NewCompress(clientId, apiKey string, isDebug bool) (ICompress, error) {
-	if clientId == "" {
-		return nil, fmt.Errorf("clientId is compulsory")
+func NewCompress(customerName, apiKey string, isDebug bool) (ICompress, error) {
+	if customerName == "" {
+		return nil, fmt.Errorf("customerName is compulsory")
 	}
 	if apiKey == "" {
 		return nil, fmt.Errorf("apiKey is compulsory")
 	}
-	customerName := strings.ReplaceAll(clientId, "_client", "")
+	//customerName := strings.ReplaceAll(clientId, "_client", "")
+	clientId := customerName + "_client"
 	c := &compress{
 		debug:        isDebug,
 		restClient:   resty.New(),
