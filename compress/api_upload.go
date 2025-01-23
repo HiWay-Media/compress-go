@@ -170,7 +170,7 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println("responsePresignedUrl", responsePresignedUrl)
+	//fmt.Println("responsePresignedUrl", responsePresignedUrl)
 	response, err := o.restClient.R().
 		SetResult(&struct{}{}).
 		SetBody(file).
@@ -179,8 +179,9 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 	if err != nil {
 		return nil, fmt.Errorf("something went wrong during upload to s3 bucket, err: %s", err.Error())
 	}
-	fmt.Println("response", response.Result())
-
+	if response.IsError() {
+		return nil, fmt.Errorf("something went wrong during upload to s3 bucket, err: %s", response.Error())
+	}
 	/*if !response.IsSuccess() {
 		return nil, fmt.Errorf("upload to s3 bucket failed!, err: %s", err.Error())
 	}*/
@@ -199,7 +200,8 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 
 func (o *compress) createUpload(apikey string, bucketFolderDestination string, size int64, categoryId int, title string, tags string, location string, customer string, zone string) (*ResponseUpload, error) {
 	var ru ResponseUpload
-	_, err := o.restClient.R().
+	fmt.Println("createUpload ", bucketFolderDestination)
+	rCreate, err := o.restClient.R().
 		SetHeader("Content-Type", "application/json").
 		SetBody(&createUploadByApikeyRequest{
 			Filename: bucketFolderDestination,
@@ -214,9 +216,11 @@ func (o *compress) createUpload(apikey string, bucketFolderDestination string, s
 		}).
 		SetResult(&ru).
 		Post(CREATE_UPLOAD())
-
 	if err != nil {
 		return nil, err
+	}
+	if rCreate.IsError() {
+		return nil, fmt.Errorf("something went wrong during create upload and encode, err: %s", rCreate.Error())
 	}
 	if ru.Response != "OK" {
 		return nil, fmt.Errorf("something went wrong during create upload and encode, err: %s %s", ru.Message, ru.Response)
