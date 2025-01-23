@@ -1,6 +1,7 @@
 package test
 
 import (
+	"log"
 	"os"
 	"testing"
 
@@ -35,5 +36,6 @@ func GetCompress() (compress.ICompress, error) {
 	if err != nil {
 		return nil, err
 	}
+	log.Println("compress", c)
 	return c, nil
 }
