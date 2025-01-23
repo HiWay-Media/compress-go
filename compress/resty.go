@@ -1,10 +1,11 @@
 package compress
 
 import (
+	"encoding/json"
 	"fmt"
 	"log"
-	"encoding/json"
 	"strings"
+
 	"github.com/go-resty/resty/v2"
 )
 
@@ -23,11 +24,11 @@ func (o *compress) IsDebug() bool {
 	return o.debug
 }
 
-func(o *compress) GetCliendId() string {
+func (o *compress) GetCliendId() string {
 	if strings.Contains(o.customerName, "_client") {
 		return o.customerName
 	}
-	return o.customerName+"_client"
+	return o.customerName + "_client"
 }
 
 // Resty Methods
@@ -56,8 +57,7 @@ func (o *compress) restyGet(url string, queryParams map[string]string) (*resty.R
 	return resp, nil
 }
 
-
-func (o *compress) debugPrint(data interface{}) {
+func (o *compress) debugPrint(data ...interface{}) {
 	if o.debug {
 		log.Println(data)
 	}

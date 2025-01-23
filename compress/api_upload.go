@@ -161,7 +161,7 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 		return nil, fmt.Errorf("error %s", respCustomerS3.Message)
 	}
 	zone := respCustomerS3.Data.Zone
-	fmt.Println("zone ", zone)
+	o.debugPrint("zone ", zone)
 	bucketFolderDestination := respCustomerS3.Data.BucketUpload + filename
 	//o.debugPrint("bucketFolderDestination " + respCustomerS3.Data.BucketUpload)
 	fmt.Println("bucketFolderDestination", bucketFolderDestination)
@@ -247,6 +247,6 @@ func (o *compress) getMinioURL(bucketFolderDestination string, customer string) 
 	if responsePresignedUrl.Response != "OK" {
 		return nil, fmt.Errorf("something went wrong with getting presigned url minio, err: %s %s", responsePresignedUrl.Response, responsePresignedUrl.Message)
 	}
-
+	o.debugPrint(responsePresignedUrl)
 	return responsePresignedUrl, nil
 }
