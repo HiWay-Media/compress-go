@@ -37,7 +37,6 @@ func TestUpload(t *testing.T) {
 		"tag",
 		"",
 		"title.mp4",
-		"",
 	)
 	//fmt.Print(response)
 

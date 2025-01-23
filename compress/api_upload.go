@@ -151,7 +151,7 @@ func (o *compress) SetPublishedUpload(jobid int, published int) (*VideoUploadInf
 * @param {string} filename
 * @param {string} targetFolder
  */
-func (o *compress) Upload(file []byte, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error) {
+func (o *compress) Upload(file []byte, size int64, categoryId int, title string, tags string, location string, filename string) (*ResponseUpload, error) {
 	//
 	respCustomerS3, err := o.GetCustomerS3Zone()
 	if err != nil {
@@ -162,7 +162,7 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 	}
 	zone := respCustomerS3.Data.Zone
 	fmt.Println("zone ", zone)
-	bucketFolderDestination := respCustomerS3.Data.BucketUpload + "/" + targetFolder + "/" + filename
+	bucketFolderDestination := respCustomerS3.Data.BucketUpload + filename
 	//o.debugPrint("bucketFolderDestination " + respCustomerS3.Data.BucketUpload)
 	fmt.Println("bucketFolderDestination", bucketFolderDestination)
 	//
