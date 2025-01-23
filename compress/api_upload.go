@@ -161,15 +161,16 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 		return nil, fmt.Errorf("error %s", respCustomerS3.Message)
 	}
 	zone := respCustomerS3.Data.Zone
+	fmt.Println("zone ", zone)
 	bucketFolderDestination := respCustomerS3.Data.BucketUpload + "/" + targetFolder + "/" + filename
 	//o.debugPrint("bucketFolderDestination " + respCustomerS3.Data.BucketUpload)
-	fmt.Println(bucketFolderDestination)
+	fmt.Println("bucketFolderDestination", bucketFolderDestination)
 	//
 	responsePresignedUrl, err := o.getMinioURL(bucketFolderDestination, o.customerName)
 	if err != nil {
 		return nil, err
 	}
-
+	fmt.Println("responsePresignedUrl", responsePresignedUrl)
 	response, err := o.restClient.R().
 		SetResult(&struct{}{}).
 		SetBody(file).
@@ -178,7 +179,7 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 	if err != nil {
 		return nil, fmt.Errorf("something went wrong during upload to s3 bucket, err: %s", err.Error())
 	}
-	response.Result()
+	fmt.Println("response", response.Result())
 
 	/*if !response.IsSuccess() {
 		return nil, fmt.Errorf("upload to s3 bucket failed!, err: %s", err.Error())
@@ -186,7 +187,6 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 
 	responseCreateUploadAndEncode, err := o.createUpload(o.apiKey, bucketFolderDestination, size, categoryId, title, tags, location, o.customerName, zone)
 	if err != nil {
-
 		return nil, err
 	}
 
@@ -214,6 +214,7 @@ func (o *compress) createUpload(apikey string, bucketFolderDestination string, s
 		}).
 		SetResult(&ru).
 		Post(CREATE_UPLOAD())
+
 	if err != nil {
 		return nil, err
 	}
