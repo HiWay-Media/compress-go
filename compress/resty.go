@@ -59,7 +59,7 @@ func (o *compress) restyGet(url string, queryParams map[string]string) (*resty.R
 
 func (o *compress) debugPrint(data ...interface{}) {
 	if o.debug {
-		log.Println(data)
+		log.Println(data...)
 	}
 }
 
