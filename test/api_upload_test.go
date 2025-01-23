@@ -14,7 +14,7 @@ func TestUpload(t *testing.T) {
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
-	c.IsDebug()
+	//c.IsDebug()
 
 	filePath := "test.mp4"
 	fileContent, err := os.ReadFile(filePath)
@@ -37,11 +37,14 @@ func TestUpload(t *testing.T) {
 		"title.mp4",
 		"/VMFS1/FILES/upload/test",
 	)
-
-	fmt.Print(response)
+	//fmt.Print(response)
 
 	if err != nil {
 		t.Fatalf(err.Error())
+	}
+
+	if response.Response != "OK" {
+		t.Fatalf(fmt.Sprintf("error %s", response.Message))
 	}
 }
 
