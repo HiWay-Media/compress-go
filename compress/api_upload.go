@@ -3,9 +3,8 @@ package compress
 import (
 	"encoding/json"
 	"fmt"
-	"github.com/minio/minio-go"
+
 	"gopkg.in/validator.v2"
-	"io"
 )
 
 /**
@@ -153,8 +152,17 @@ func (o *compress) SetPublishedUpload(jobid int, published int) (*VideoUploadInf
 * @param {string} targetFolder
  */
 func (o *compress) Upload(file []byte, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error) {
-	// TODO: add logic get zone
-	bucketFolderDestination := targetFolder + "/" + filename
+	//
+	respCustomerS3, err := o.GetCustomerS3Zone()
+	if err != nil {
+		return nil, err
+	}
+	if respCustomerS3.Response != "OK" {
+		return nil, fmt.Errorf("error %s", respCustomerS3.Message)
+	}
+	zone := respCustomerS3.Data.Zone
+	bucketFolderDestination := respCustomerS3.Data.BucketUpload + "/" + targetFolder + "/" + filename
+	o.debugPrint("bucketFolderDestination " + respCustomerS3.Data.BucketUpload)
 	responsePresignedUrl, err := o.getMinioURL(bucketFolderDestination, o.customerName)
 	if err != nil {
 		return nil, err
@@ -173,7 +181,7 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 		return nil, fmt.Errorf("upload to s3 bucket failed!, err: %s", err.Error())
 	}
 
-	responseCreateUploadAndEncode, err := o.createUpload(o.apiKey, bucketFolderDestination, size, categoryId, title, tags, location, o.customerName)
+	responseCreateUploadAndEncode, err := o.createUpload(o.apiKey, bucketFolderDestination, size, categoryId, title, tags, location, o.customerName, zone)
 	if err != nil {
 		return nil, err
 	}
@@ -185,7 +193,7 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 	return responseCreateUploadAndEncode, nil
 }
 
-func (o *compress) createUpload(apikey string, bucketFolderDestination string, size int64, categoryId int, title string, tags string, location string, customer string) (*ResponseUpload, error) {
+func (o *compress) createUpload(apikey string, bucketFolderDestination string, size int64, categoryId int, title string, tags string, location string, customer string, zone string) (*ResponseUpload, error) {
 	var ru ResponseUpload
 	_, err := o.restClient.R().
 		SetHeader("Content-Type", "application/json").
@@ -209,7 +217,7 @@ func (o *compress) getMinioURL(bucketFolderDestination string, customer string) 
 		SetHeader("Content-Type", "application/json").
 		SetBody(&minioUploadPresignedByApikeyRequest{
 			//Customer: customer,
-			ApiKey: o.apiKey,
+			ApiKey:   o.apiKey,
 			ClientId: o.clientId,
 			FileName: bucketFolderDestination,
 		}).
@@ -225,30 +233,4 @@ func (o *compress) getMinioURL(bucketFolderDestination string, customer string) 
 	}
 
 	return responsePresignedUrl, nil
-}
-
-func (o *compress) UploadMultipart(reader io.Reader, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error) {
-	objectPath := targetFolder + "/" + filename
-	_, err := o.minioClient.PutObject(
-		o.bucket,
-		objectPath,
-		reader,
-		size,
-		minio.PutObjectOptions{},
-	)
-
-	if err != nil {
-		return nil, err
-	}
-
-	responseCreateUploadAndEncode, err := o.createUpload(o.apiKey, objectPath, size, categoryId, title, tags, location, o.customerName)
-	if err != nil {
-		return nil, err
-	}
-
-	if responseCreateUploadAndEncode.Response != "OK" {
-		return nil, fmt.Errorf("something went wrong during create upload and encode, err: %s %s", responseCreateUploadAndEncode.Message, responseCreateUploadAndEncode.Response)
-	}
-
-	return responseCreateUploadAndEncode, nil
 }

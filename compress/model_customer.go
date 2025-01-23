@@ -1,8 +1,9 @@
 package compress
 
 import "time"
+
 /*
-*/
+ */
 type Credential struct {
 	ID                       int    `json:"id"`
 	CustomerID               int    `json:"customer_id" `
@@ -34,13 +35,17 @@ type Credential struct {
 	LumenS3SecretKey         string `json:"lumen_s3_secret_key" `
 }
 
-
 type ResponseServerCredential struct {
 	Message  string     `json:"message"`
 	Response string     `json:"response"`
 	Data     Credential `json:"data"`
 }
 
+type ResponseCustomerS3 struct {
+	Message  string     `json:"message"`
+	Response string     `json:"response"`
+	Data     CustomerS3 `json:"data"`
+}
 
 type CustomerS3 struct {
 	ID                     int        `json:"id" `
