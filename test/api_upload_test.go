@@ -23,7 +23,7 @@ func TestUpload(t *testing.T) {
 	if err != nil {
 		t.Fatalf(err.Error())
 	}
-	fmt.Print(fileContent)
+	//fmt.Print(fileContent)
 	stat, err := os.Stat(filePath)
 	if err != nil {
 		t.Fatalf(err.Error())
