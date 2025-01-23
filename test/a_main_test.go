@@ -1,7 +1,6 @@
 package test
 
 import (
-	"log"
 	"os"
 	"testing"
 
@@ -30,12 +29,13 @@ func TestNewCompress(t *testing.T) {
 
 func GetCompress() (compress.ICompress, error) {
 	apiKey := os.Getenv("API_KEY")
-	clientId := os.Getenv("CLIENT_ID")
+	//clientId := os.Getenv("CLIENT_ID")
+	customerName := os.Getenv("CUSTOMER_NAME")
 	//
-	c, err := compress.NewCompress(clientId, apiKey, false)
+	c, err := compress.NewCompress(customerName, apiKey, false)
 	if err != nil {
 		return nil, err
 	}
-	log.Println("compress", c)
+	//log.Println("compress", c)
 	return c, nil
 }
