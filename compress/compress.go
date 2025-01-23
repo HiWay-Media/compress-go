@@ -2,7 +2,6 @@ package compress
 
 import (
 	"fmt"
-	"io"
 	"strings"
 
 	"github.com/go-resty/resty/v2"
@@ -19,7 +18,7 @@ type ICompress interface {
 	GetJobidProgress(jobid int) (*VideoUploadInfo, error)
 	SetPublishedUpload(jobid int, published int) (*VideoUploadInfo, error)
 	Upload(file []byte, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error)
-	UploadMultipart(reader io.Reader, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error)
+	//UploadMultipart(reader io.Reader, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error) // need to add this feature
 	GetCategories() ([]Category, error)
 	CreateCategory(name string) (*Category, error)
 	GetRestreamers(startFrom int, amount int) ([]Restreamer, error)                  // startFrom int, amount int
@@ -30,14 +29,13 @@ type ICompress interface {
 	RestreamerHlsStart(instanceName string, streamProtocol string) (*HlsResponse, error)
 	RestreamerHlsStop(instanceName string, streamProtocol string) (*HlsResponse, error)
 	RestreamerEventsHistory(startFrom int, amount int) ([]RestreamerEvent, error)
-	GetCustomerS3Zone() (*CustomerS3, error)
+	GetCustomerS3Zone() (*ResponseCustomerS3, error)
 	GenerateVodProxy(eventId string, instanceName string, title string) (*generateVodResponse, error)
 	//
 }
 
 type compress struct {
 	restClient   *resty.Client
-	minioClient  *minio.Client
 	bucket       string
 	debug        bool
 	customerName string
@@ -70,21 +68,6 @@ func NewCompress(clientId, apiKey string, isDebug bool) (ICompress, error) {
 	}
 	c.customerId = cred.CustomerID
 
-	/*u, err := url.Parse(cred.S3Host)
-	if err != nil {
-		return nil, err
-	}
-	// @p4xx07 need to refactor with multizone
-	c.minioClient, err = getMinioClient(
-		u.Host,
-		cred.S3AccessKey,
-		cred.S3SecretKey,
-		false,
-	)
-	c.bucket = cred.S3Bucket
-	if err != nil {
-		return nil, err
-	}*/
 	return c, nil
 }
 

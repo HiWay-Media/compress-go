@@ -45,6 +45,7 @@ func TestUpload(t *testing.T) {
 	}
 }
 
+/*
 func TestUploadMultipart(t *testing.T) {
 	if os.Getenv("APP_ENV") == "runner" {
 		return
@@ -85,3 +86,4 @@ func TestUploadMultipart(t *testing.T) {
 		t.Fatalf(err.Error())
 	}
 }
+*/

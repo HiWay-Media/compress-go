@@ -31,14 +31,14 @@ func (o *compress) GetCredentials() (*Credential, error) {
 *
 * @returns customer_s3
  */
-func (o *compress) GetCustomerS3Zone() (*CustomerS3, error) {
+func (o *compress) GetCustomerS3Zone() (*ResponseCustomerS3, error) {
 	//
-	resp, err := o.restyPost(GET_ZONE(),  BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey} )
+	resp, err := o.restyPost(GET_ZONE(), BaseModel{ClientId: o.GetCliendId(), ApiKey: o.apiKey})
 	if err != nil {
 		return nil, err
 	}
 	//o.debugPrint(resp)
-	var obj CustomerS3
+	var obj ResponseCustomerS3
 	if err := json.Unmarshal(resp.Body(), &obj); err != nil {
 		return nil, err
 	}
