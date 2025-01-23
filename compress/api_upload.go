@@ -162,7 +162,8 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 	}
 	zone := respCustomerS3.Data.Zone
 	bucketFolderDestination := respCustomerS3.Data.BucketUpload + "/" + targetFolder + "/" + filename
-	o.debugPrint("bucketFolderDestination " + respCustomerS3.Data.BucketUpload)
+	//o.debugPrint("bucketFolderDestination " + respCustomerS3.Data.BucketUpload)
+	fmt.Println(bucketFolderDestination)
 	//
 	responsePresignedUrl, err := o.getMinioURL(bucketFolderDestination, o.customerName)
 	if err != nil {
@@ -177,10 +178,11 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 	if err != nil {
 		return nil, fmt.Errorf("something went wrong during upload to s3 bucket, err: %s", err.Error())
 	}
+	response.Result()
 
-	if !response.IsSuccess() {
+	/*if !response.IsSuccess() {
 		return nil, fmt.Errorf("upload to s3 bucket failed!, err: %s", err.Error())
-	}
+	}*/
 
 	responseCreateUploadAndEncode, err := o.createUpload(o.apiKey, bucketFolderDestination, size, categoryId, title, tags, location, o.customerName, zone)
 	if err != nil {
