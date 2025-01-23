@@ -186,6 +186,7 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 
 	responseCreateUploadAndEncode, err := o.createUpload(o.apiKey, bucketFolderDestination, size, categoryId, title, tags, location, o.customerName, zone)
 	if err != nil {
+
 		return nil, err
 	}
 
@@ -201,17 +202,24 @@ func (o *compress) createUpload(apikey string, bucketFolderDestination string, s
 	_, err := o.restClient.R().
 		SetHeader("Content-Type", "application/json").
 		SetBody(&createUploadByApikeyRequest{
-			Filename:      bucketFolderDestination,
-			Size:          int(size),
-			Category:      categoryId,
-			Title:         title,
-			Tags:          tags,
-			Location:      location,
-			ReportedEmail: fmt.Sprintf("%s@tngrm.io", customer),
+			Filename: bucketFolderDestination,
+			Size:     int(size),
+			Category: categoryId,
+			Title:    title,
+			Tags:     tags,
+			Location: location,
+			//ReportedEmail: fmt.Sprintf("%s@tngrm.io", customer),
+			ReportedEmail: "",
 			Apikey:        apikey,
 		}).
 		SetResult(&ru).
 		Post(CREATE_UPLOAD())
+	if err != nil {
+		return nil, err
+	}
+	if ru.Response != "OK" {
+		return nil, fmt.Errorf("something went wrong during create upload and encode, err: %s %s", ru.Message, ru.Response)
+	}
 	return &ru, err
 }
 

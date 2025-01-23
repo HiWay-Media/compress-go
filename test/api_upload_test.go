@@ -37,7 +37,7 @@ func TestUpload(t *testing.T) {
 		"tag",
 		"",
 		"title.mp4",
-		"/VMFS1/FILES/upload/test",
+		"",
 	)
 	//fmt.Print(response)
 
