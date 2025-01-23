@@ -162,7 +162,8 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 	}
 	zone := respCustomerS3.Data.Zone
 	o.debugPrint("zone ", zone)
-	bucketFolderDestination := respCustomerS3.Data.BucketUpload + filename
+	fmt.Println("bucketUpload: ", respCustomerS3.Data.BucketUpload)
+	bucketFolderDestination := NormalizeURL(respCustomerS3.Data.BucketUpload + filename)
 	//o.debugPrint("bucketFolderDestination " + respCustomerS3.Data.BucketUpload)
 	fmt.Println("bucketFolderDestination", bucketFolderDestination)
 	//
