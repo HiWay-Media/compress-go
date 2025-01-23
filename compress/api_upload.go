@@ -204,15 +204,15 @@ func (o *compress) createUpload(apikey string, bucketFolderDestination string, s
 	rCreate, err := o.restClient.R().
 		SetHeader("Content-Type", "application/json").
 		SetBody(&createUploadByApikeyRequest{
-			Filename: bucketFolderDestination,
-			Size:     int(size),
-			Category: categoryId,
-			Title:    title,
-			Tags:     tags,
-			Location: location,
-			//ReportedEmail: fmt.Sprintf("%s@tngrm.io", customer),
-			ReportedEmail: "",
-			Apikey:        apikey,
+			Filename:      bucketFolderDestination,
+			Size:          int(size),
+			Category:      categoryId,
+			Title:         title,
+			Tags:          tags,
+			Location:      location,
+			ReportedEmail: fmt.Sprintf("%s@tngrm.io", customer),
+			//ReportedEmail: "",
+			Apikey: apikey,
 		}).
 		SetResult(&ru).
 		Post(CREATE_UPLOAD())
