@@ -31,12 +31,12 @@ func TestUpload(t *testing.T) {
 
 	response, err := c.Upload(
 		fileContent,
+		stat.Name(),
 		stat.Size(),
 		60678,
 		"title",
 		"tag",
 		"",
-		filePath,
 	)
 	//fmt.Print(response)
 

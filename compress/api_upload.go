@@ -143,15 +143,14 @@ func (o *compress) SetPublishedUpload(jobid int, published int) (*VideoUploadInf
 * upload file to compress
 * gets signed url from minio, uploads and finally creates the upload record.
 * @param {string} file
+* @param {string} filename
 * @param {string} size
 * @param {int} categoryId
 * @param {string} title
 * @param {string} tags
 * @param {string} location
-* @param {string} filename
-* @param {string} targetFolder
  */
-func (o *compress) Upload(file []byte, size int64, categoryId int, title string, tags string, location string, filename string) (*ResponseUpload, error) {
+func (o *compress) Upload(file []byte, filename string, size int64, categoryId int, title string, tags string, location string) (*ResponseUpload, error) {
 	//
 	respCustomerS3, err := o.GetCustomerS3Zone()
 	if err != nil {
@@ -163,7 +162,7 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 	zone := respCustomerS3.Data.Zone
 	o.debugPrint("zone ", zone)
 	fmt.Println("bucketUpload: ", respCustomerS3.Data.BucketUpload, " zone ", zone)
-	bucketFolderDestination := NormalizeURL(respCustomerS3.Data.BucketUpload + filename)
+	bucketFolderDestination := NormalizeURL(respCustomerS3.Data.BucketUpload + "/" + filename)
 	//o.debugPrint("bucketFolderDestination " + respCustomerS3.Data.BucketUpload)
 	fmt.Println("bucketFolderDestination", bucketFolderDestination)
 	//
