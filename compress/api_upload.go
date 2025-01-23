@@ -153,6 +153,7 @@ func (o *compress) SetPublishedUpload(jobid int, published int) (*VideoUploadInf
 * @param {string} targetFolder
  */
 func (o *compress) Upload(file []byte, size int64, categoryId int, title string, tags string, location string, filename string, targetFolder string) (*ResponseUpload, error) {
+	// TODO: add logic get zone
 	bucketFolderDestination := targetFolder + "/" + filename
 	responsePresignedUrl, err := o.getMinioURL(bucketFolderDestination, o.customerName)
 	if err != nil {
