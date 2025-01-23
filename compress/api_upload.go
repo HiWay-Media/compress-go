@@ -180,7 +180,7 @@ func (o *compress) Upload(file []byte, size int64, categoryId int, title string,
 		return nil, fmt.Errorf("something went wrong during upload to s3 bucket, err: %s", err.Error())
 	}
 	if response.IsError() {
-		return nil, fmt.Errorf("something went wrong during upload to s3 bucket, err: %s", response.Error())
+		return nil, fmt.Errorf("something went wrong during upload to s3 bucket resp Error, err: %s", response.Error())
 	}
 	/*if !response.IsSuccess() {
 		return nil, fmt.Errorf("upload to s3 bucket failed!, err: %s", err.Error())
